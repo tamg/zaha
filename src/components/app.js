@@ -1,9 +1,15 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import MenuBar from './menu-bar'
 
-export default class App extends Component {
+class App extends Component {
+
   render() {
     return (
-      <div>Hello!</div>
+      <div>
+        <MenuBar />
+      </div>
     );
   }
 }
+
+export default App
