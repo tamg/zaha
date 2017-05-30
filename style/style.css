@@ -1,0 +1,21 @@
+body {
+  background: rgb(207, 215, 215);
+  font-family: monospace;
+  font-size: 20px;
+}
+
+.menu {
+  list-style: none;
+  width: auto;
+  display: inline-flex;
+}
+
+.menu li {
+  padding: 10px;
+}
+
+.textNote {
+  border: 1px solid black;
+  width: 100px;
+  padding: 10px;
+}

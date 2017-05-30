@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import App from './components/app';
+import Board from './components/Board';
 
-ReactDOM.render(<App /> , document.querySelector('.container'));
+ReactDOM.render(<Board /> , document.querySelector('.container'));
