@@ -1,18 +1,24 @@
 import React, { Component } from 'react'
+import Draggable from 'react-draggable'
 
 class TextNote extends Component {
 
-  count() {
-    var c = 0
-    this.setState({note: c++ })
+  componentWillMount() { //set a random mounting position of note right before rendering
+    this.style = {
+      right: 50,
+      top: 50,
+      backgroundColor: 'red',
+    }
   }
 
   render(){
     return (
-      <div className="textNote">
-        <div onClick={this.props.onClick} >Title </div>
-        <div>Note</div>
-      </div>
+      <Draggable>
+        <div className="textNote" style={this.style}>
+          <div>Title </div>
+          <div>Note</div>
+        </div>
+      </Draggable>
     )
   }
 }
