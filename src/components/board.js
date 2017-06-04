@@ -12,6 +12,8 @@ class Board extends Component {
       videoNotes: [],
       sketchNotes: []
     }
+
+    this.toggleEditing = this.toggleEditing.bind(this)
   }
 
   nextId() {
@@ -29,8 +31,24 @@ class Board extends Component {
     this.setState({txtNotes})
   }
 
+  handleSaveNote(){
+    console.log('save');
+  }
+
+  toggleEditing(id){
+    var txtNotes = [...this.state.txtNotes]
+    var editingNote = txtNotes[id]
+    var currentEditState = editingNote.editing
+    editingNote.editing = !currentEditState
+    this.setState({txtNotes})
+  }
+
   eachNote(txtNote) {
-    return (<TextNote key={txtNote.id} id={txtNote.id}>
+    return (<TextNote
+              key={txtNote.id}
+              id={txtNote.id}
+              editing={txtNote.editing}
+              toggleEditing={() => this.toggleEditing(txtNote.id)}>
               {txtNote.note}
             </TextNote>)
   }
