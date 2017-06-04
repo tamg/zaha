@@ -23,7 +23,8 @@ class Board extends Component {
     var txtNotes = [...this.state.txtNotes,
         {
           id: this.nextId(),
-          note: text
+          note: text,
+          editing: false
         }]
     this.setState({txtNotes})
   }

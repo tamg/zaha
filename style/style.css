@@ -15,7 +15,9 @@ body {
 }
 
 .textNote {
-  border: 1px solid black;
-  width: 100px;
-  padding: 10px;
+
+}
+
+.textInput {
+  width: 100%;
 }

@@ -5,9 +5,13 @@ class TextNote extends Component {
 
   componentWillMount() { //set a random mounting position of note right before rendering
     this.style = {
-      right: 50,
-      top: 50,
-      backgroundColor: 'red',
+      border: '1px solid black',
+      width: '200px',
+      padding: '10px',
+      position: 'absolute',
+      right: window.innerWidth/2 + 'px',
+      top: window.innerHeight/2 + 'px',
+      backgroundColor: 'white',
     }
   }
 
@@ -15,8 +19,9 @@ class TextNote extends Component {
     return (
       <Draggable>
         <div className="textNote" style={this.style}>
-          <div>Title </div>
-          <div>Note</div>
+          <textarea className="textInput">
+
+          </textarea>
         </div>
       </Draggable>
     )
