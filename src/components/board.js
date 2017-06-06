@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import TextNote from './text-note'
+import ImageNote from './image-note'
 
 
 class Board extends Component {
@@ -12,8 +13,6 @@ class Board extends Component {
       videoNotes: [],
       sketchNotes: []
     }
-
-    this.toggleEditing = this.toggleEditing.bind(this)
   }
 
   nextId() {
@@ -31,15 +30,31 @@ class Board extends Component {
     this.setState({txtNotes})
   }
 
-  handleSaveNote(){
-    console.log('save');
+  toggleEditing(id){
+    var txtNotes = this.state.txtNotes.map((note) => {
+      if(note.id === id){
+        var currentEditState = note.editing
+        note.editing = !currentEditState
+        return note
+      }
+      return note
+    })
+    this.setState({txtNotes})
   }
 
-  toggleEditing(id){
-    var txtNotes = [...this.state.txtNotes]
-    var editingNote = txtNotes[id]
-    var currentEditState = editingNote.editing
-    editingNote.editing = !currentEditState
+  onSave(newText, id){
+    var txtNotes = this.state.txtNotes.map((note) => {
+      if(note.id === id){
+        note.note = newText
+        return note
+      }
+      return note
+    })
+    this.setState({txtNotes})
+  }
+
+  onRemove(id){
+    var txtNotes = this.state.txtNotes.filter(note => note.id !== id)
     this.setState({txtNotes})
   }
 
@@ -48,21 +63,44 @@ class Board extends Component {
               key={txtNote.id}
               id={txtNote.id}
               editing={txtNote.editing}
-              toggleEditing={() => this.toggleEditing(txtNote.id)}>
-              {txtNote.note}
-            </TextNote>)
+              toggleEditing={this.toggleEditing.bind(this)}
+              onRemove={this.onRemove.bind(this)}
+              onSave={this.onSave.bind(this)}
+              note={txtNote.note}
+            />)
+  }
+
+  addImage(src){
+    var imageNotes = [...this.state.imageNotes,
+        {
+          id: this.nextId(),
+          src: src,
+        }]
+    this.setState({imageNotes})
+  }
+
+  eachImage(imageNote) {
+    return (<ImageNote
+              key={imageNote.id}
+              id={imageNote.id}
+              src={imageNote.src}
+              toggleEditing={this.toggleEditing.bind(this)}
+              onRemove={this.onRemove.bind(this)}
+              onSave={this.onSave.bind(this)}
+            />)
   }
 
   render() {
     return (
       <div>
         <ul className="menu">
-          <li onClick={()=> this.addNote('New Note')}> Text </li>
-          <li onClick={()=> this.addNote('New Note')}> Image </li>
+          <li onClick={()=> this.addNote('New Notee')}> Text </li>
+          <li onClick={()=> this.addImage('https://cdn-images-1.medium.com/max/800/1*Cx4fcxgCFGgI3TyL43Ed1g.png')}> Image </li>
           <li onClick={()=> this.addNote('New Note')}> Sketch </li>
         </ul>
         <ul>
-           {this.state.txtNotes.map(this.eachNote)}
+           {this.state.txtNotes.map(this.eachNote, this)}
+           {this.state.imageNotes.map(this.eachImage, this)}
         </ul>
       </div>
     )

@@ -22,13 +22,12 @@ class TextNote extends Component {
   }
 
   edit() {
-    console.log(this.props);
-    this.props.toggleEditing()
+    this.props.toggleEditing(this.props.id)
   }
 
   save() {
-    this.props.onChange(this.refs.newText.value, this.props.id ) //whenver note is updated(clicked on save) pass newText and id to parent update function to handle it for us. after update handles newText, it updates the notes array which gets rerenderd
-    this.setState({editing: false})
+    this.props.onSave(this.refs.newText.value, this.props.id) //whenver note is updated(clicked on save) pass newText and id to parent update function to handle it for us. after update handles newText, it updates the notes array which gets rerenderd
+    this.props.toggleEditing(this.props.id)
   }
 
   remove() {
@@ -37,12 +36,10 @@ class TextNote extends Component {
 
   editMode() {// render editing form
     return(
-      <div className="note"
-           style={this.style}>
-        <textarea ref="newText"
-                  defaultValue={this.props.children}>
+      <div className="note" style={this.style}>
+        <textarea ref="newText" defaultValue={this.props.children}>
         </textarea>
-        <button onClick={this.save}>Save</button>
+        <button onClick={() => this.save()}> Save </button>
       </div>
     )
   }//ref is used to save input text data
@@ -50,12 +47,11 @@ class TextNote extends Component {
 
   displayMode() {// render note display
     return (
-      <div className="textNote"
-           style={this.style}>
-        <p>{this.props.children}</p>
+      <div className="textNote"style={this.style}>
+        <p>{this.props.note}</p>
         <span>
           <button onClick={() => this.edit()}>EDIT</button>
-          <button onClick={this.remove}>X</button>
+          <button onClick={() => this.remove()}>X</button>
         </span>
       </div>
     )
