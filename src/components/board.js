@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import TextNote from './text-note'
 import ImageNote from './image-note'
+import SketchNote from './sketch-note'
 
 
 class Board extends Component {
@@ -90,17 +91,33 @@ class Board extends Component {
             />)
   }
 
+  addSketch(){
+    var sketchNotes = [...this.state.sketchNotes,
+        {
+          id: this.nextId(),
+        }]
+    this.setState({sketchNotes})
+  }
+
+  eachSketch(sketchNote){
+    return (<SketchNote
+      key={sketchNote.id}
+      id={sketchNote.id}
+      />)
+  }
+
   render() {
     return (
       <div>
         <ul className="menu">
           <li onClick={()=> this.addNote('New Notee')}> Text </li>
           <li onClick={()=> this.addImage('https://cdn-images-1.medium.com/max/800/1*Cx4fcxgCFGgI3TyL43Ed1g.png')}> Image </li>
-          <li onClick={()=> this.addNote('New Note')}> Sketch </li>
+          <li onClick={()=> this.addSketch()}> Sketch </li>
         </ul>
         <ul>
            {this.state.txtNotes.map(this.eachNote, this)}
            {this.state.imageNotes.map(this.eachImage, this)}
+           {this.state.sketchNotes.map(this.eachSketch, this)}
         </ul>
       </div>
     )
