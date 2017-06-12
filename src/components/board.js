@@ -110,7 +110,7 @@ class Board extends Component {
     return (
       <div>
         <ul className="menu">
-          <li onClick={()=> this.addNote('New Notee')}> Text </li>
+          <li onClick={()=> this.addNote('New Note...')}> Text </li>
           <li onClick={()=> this.addImage('https://cdn-images-1.medium.com/max/800/1*Cx4fcxgCFGgI3TyL43Ed1g.png')}> Image </li>
           <li onClick={()=> this.addSketch()}> Sketch </li>
         </ul>

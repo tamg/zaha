@@ -1,7 +1,7 @@
-import React, { Component } from'react';
-import P5Wrapper from 'react-p5-wrapper';
-import sketch from './sketches/sketch';
-import sketch2 from './sketches/sketch2';
+import React, { Component } from'react'
+import P5Wrapper from 'react-p5-wrapper'
+import sketch from './sketches/sketch'
+import sketch2 from './sketches/sketch2'
 import Draggable from 'react-draggable'
 
 class SketchNote extends Component {
@@ -36,8 +36,9 @@ class SketchNote extends Component {
 
 	render () {
 		return (
-			<Draggable>
+			<Draggable handle="strong">
 			<div style={this.style}>
+				<strong className="cursor"><div className="drag-bar">Drag here</div></strong>
 				<P5Wrapper sketch={this.state.stateSketch} rotation={this.state.rotation}/>
 				<input type="range" value={this.state.rotation}  min="0"  max="360" step="1" onInput={this.rotationChange.bind(this)}/>
 				<button onClick={this.pressEvent.bind(this)}>Change Sketch</button>

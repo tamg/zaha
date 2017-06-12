@@ -4,8 +4,6 @@ import Draggable from 'react-draggable'
 class TextNote extends Component {
   constructor(){
     super()
-    // this.edit = this.edit.bind(this)
-    // this.remove = this.remove.bind(this)
   }
 
   componentWillMount() { //set a random mounting position of note right before rendering
@@ -47,7 +45,7 @@ class TextNote extends Component {
 
   displayMode() {// render note display
     return (
-      <div className="textNote"style={this.style}>
+      <div className="textNote" style={this.style}>
         <p>{this.props.note}</p>
         <span>
           <button onClick={() => this.edit()}>EDIT</button>

@@ -21,3 +21,7 @@ body {
 .textInput {
   width: 100%;
 }
+
+.drag-bar {
+  background: grey;
+}
