@@ -4,7 +4,6 @@ import TextNote from './text-note'
 import ImageNote from './image-note'
 import SketchNote from './sketch-note'
 
-
 class Board extends Component {
   constructor(props) {
     super(props)
@@ -13,19 +12,17 @@ class Board extends Component {
       return <div>loading</div>
     } else {
       const activeBoard = this.props.activeBoard
-      console.log(activeBoard);
     }
   }
-
 
   eachNote(txtNote) {
     return (<TextNote
               key={txtNote.id}
               id={txtNote.id}
               editing={txtNote.editing}
-              // toggleEditing={this.toggleEditing.bind(this)}
-              // onRemove={this.onRemove.bind(this)}
-              // onSave={this.onSave.bind(this)}
+              onToggle={this.props.onToggle}
+              onRemove={this.props.onRemove}
+              onSave={this.props.onSave}
               note={txtNote.note}
             />)
   }
@@ -35,7 +32,7 @@ class Board extends Component {
               key={imageNote.id}
               id={imageNote.id}
               src={imageNote.src}
-              // toggleEditing={this.toggleEditing.bind(this)}
+              // onToggle={this.onToggle.bind(this)}
               // onRemove={this.onRemove.bind(this)}
               // onSave={this.onSave.bind(this)}
             />)

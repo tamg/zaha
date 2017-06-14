@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import MenuBar from './menu-bar'
+import BoardList from './board-list'
 import Board from './board'
 import TextNote from './text-note'
 import ImageNote from './image-note'
@@ -10,6 +11,8 @@ class App extends Component {
     super()
 
     const board = {
+      id: 0,
+      title: 'default',
       txtNotes: [{
         id: 0,
         note: 'neeeew note',
@@ -18,7 +21,7 @@ class App extends Component {
     }
 
     this.state = {
-      boards:[],
+      boards: [],
       activeBoard: board
     }
   }
@@ -28,20 +31,42 @@ class App extends Component {
     return this.uniqueId++
   }
 
+  addBoard() {
+    console.log('adding');
+    var boards = [...this.state.boards,
+    {
+      id: this.nextId(),
+      title: `New Board`, //rename later
+      txtNotes:[],
+      imageNotes:[],
+      sketchNotes:[]
+    }]
+    var activeBoard = boards[boards.length-1]
+    this.setState({boards, activeBoard})
+  }
+
   addNote(text) {
-    var txtNotes = [...this.state.txtNotes,
+    var activeBoardId = this.state.activeBoard.id
+    var boards = this.state.boards.map((board) => {
+      console.log(board.id);
+      if(board.id === activeBoardId) {
+        var txtNotes = [...board.txtNotes,
         {
           id: this.nextId(),
           note: text,
           editing: false
         }]
-    this.setState({txtNotes})
+      }
+    })
+
+    this.setState({boards})
   }
 
-  toggleEditing(id){
-    var txtNotes = this.state.txtNotes.map((note) => {
+  onToggle(id){
+    console.log(this);
+    var txtNotes = this.state.boards.txtNotes.map((note) => {
       if(note.id === id){
-        var currentEditState = note.editing
+        var currentEditState = note.editing //simplify
         note.editing = !currentEditState
         return note
       }
@@ -51,7 +76,7 @@ class App extends Component {
   }
 
   onSave(newText, id){
-    var txtNotes = this.state.txtNotes.map((note) => {
+    var txtNotes = this.state.boards.txtNotes.map((note) => {
       if(note.id === id){
         note.note = newText
         return note
@@ -62,8 +87,8 @@ class App extends Component {
   }
 
   onRemove(id){
-    var txtNotes = this.state.txtNotes.filter(note => note.id !== id)
-    this.setState({txtNotes})
+    var txtNotes = this.state.boards.txtNotes.filter(note => note.id !== id)
+    this.setState({txtNotes: txtNotes})
   }
 
   addImage(src){
@@ -87,11 +112,17 @@ class App extends Component {
     return (
       <div>
         <MenuBar
+          addBoard={this.addBoard.bind(this)}
           addNote={() => this.addNote('New Note')}
           addImage={() => this.addImage('https://cdn-images-1.medium.com/max/800/1*Cx4fcxgCFGgI3TyL43Ed1g.png')}
           addSketch={() => this.addSketch()}/>
 
-        <Board activeBoard={this.state.activeBoard}/>
+        <BoardList boards={this.state.boards} />
+
+        <Board activeBoard={this.state.activeBoard}
+               onToggle={this.onToggle.bind(this)}
+               onSave={this.onSave.bind(this)}
+               onRemove={this.onRemove.bind(this)}/>
       </div>
 
     )

@@ -20,12 +20,12 @@ class TextNote extends Component {
   }
 
   edit() {
-    this.props.toggleEditing(this.props.id)
+    this.props.onToggle(this.props.id)
   }
 
   save() {
     this.props.onSave(this.refs.newText.value, this.props.id) //whenver note is updated(clicked on save) pass newText and id to parent update function to handle it for us. after update handles newText, it updates the notes array which gets rerenderd
-    this.props.toggleEditing(this.props.id)
+    this.props.onToggle(this.props.id)
   }
 
   remove() {
