@@ -1,83 +1,33 @@
 import React, { Component } from 'react'
+import MenuBar from './menu-bar'
 import TextNote from './text-note'
 import ImageNote from './image-note'
 import SketchNote from './sketch-note'
 
 
 class Board extends Component {
-  constructor() {
-    super()
-    this.state = {
-      txtNotes: [],
-      urlNotes: [],
-      imageNotes: [],
-      videoNotes: [],
-      sketchNotes: []
+  constructor(props) {
+    super(props)
+
+    if(!this.props.activeBoard){
+      return <div>loading</div>
+    } else {
+      const activeBoard = this.props.activeBoard
+      console.log(activeBoard);
     }
   }
 
-  nextId() {
-    this.uniqueId = this.uniqueId || 0 //first element gets 1 and uniqueId gets set to 0.
-    return this.uniqueId++
-  }
-
-  addNote(text) {
-    var txtNotes = [...this.state.txtNotes,
-        {
-          id: this.nextId(),
-          note: text,
-          editing: false
-        }]
-    this.setState({txtNotes})
-  }
-
-  toggleEditing(id){
-    var txtNotes = this.state.txtNotes.map((note) => {
-      if(note.id === id){
-        var currentEditState = note.editing
-        note.editing = !currentEditState
-        return note
-      }
-      return note
-    })
-    this.setState({txtNotes})
-  }
-
-  onSave(newText, id){
-    var txtNotes = this.state.txtNotes.map((note) => {
-      if(note.id === id){
-        note.note = newText
-        return note
-      }
-      return note
-    })
-    this.setState({txtNotes})
-  }
-
-  onRemove(id){
-    var txtNotes = this.state.txtNotes.filter(note => note.id !== id)
-    this.setState({txtNotes})
-  }
 
   eachNote(txtNote) {
     return (<TextNote
               key={txtNote.id}
               id={txtNote.id}
               editing={txtNote.editing}
-              toggleEditing={this.toggleEditing.bind(this)}
-              onRemove={this.onRemove.bind(this)}
-              onSave={this.onSave.bind(this)}
+              // toggleEditing={this.toggleEditing.bind(this)}
+              // onRemove={this.onRemove.bind(this)}
+              // onSave={this.onSave.bind(this)}
               note={txtNote.note}
             />)
-  }
-
-  addImage(src){
-    var imageNotes = [...this.state.imageNotes,
-        {
-          id: this.nextId(),
-          src: src,
-        }]
-    this.setState({imageNotes})
   }
 
   eachImage(imageNote) {
@@ -85,18 +35,10 @@ class Board extends Component {
               key={imageNote.id}
               id={imageNote.id}
               src={imageNote.src}
-              toggleEditing={this.toggleEditing.bind(this)}
-              onRemove={this.onRemove.bind(this)}
-              onSave={this.onSave.bind(this)}
+              // toggleEditing={this.toggleEditing.bind(this)}
+              // onRemove={this.onRemove.bind(this)}
+              // onSave={this.onSave.bind(this)}
             />)
-  }
-
-  addSketch(){
-    var sketchNotes = [...this.state.sketchNotes,
-        {
-          id: this.nextId(),
-        }]
-    this.setState({sketchNotes})
   }
 
   eachSketch(sketchNote){
@@ -109,16 +51,11 @@ class Board extends Component {
   render() {
     return (
       <div>
-        <ul className="menu">
-          <li onClick={()=> this.addNote('New Note...')}> Text </li>
-          <li onClick={()=> this.addImage('https://cdn-images-1.medium.com/max/800/1*Cx4fcxgCFGgI3TyL43Ed1g.png')}> Image </li>
-          <li onClick={()=> this.addSketch()}> Sketch </li>
-        </ul>
-        <ul>
-           {this.state.txtNotes.map(this.eachNote, this)}
-           {this.state.imageNotes.map(this.eachImage, this)}
-           {this.state.sketchNotes.map(this.eachSketch, this)}
-        </ul>
+        <div className="board">
+           {this.props.activeBoard.txtNotes.map(this.eachNote, this)}
+           {/* {this.props.activeBoard.imageNotes.map(this.eachImage, this)} */}
+           {/* {this.props.activeBoard.sketchNotes.map(this.eachSketch, this)} */}
+       </div>
       </div>
     )
   }

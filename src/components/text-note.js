@@ -35,7 +35,7 @@ class TextNote extends Component {
   editMode() {// render editing form
     return(
       <div className="note" style={this.style}>
-        <textarea ref="newText" defaultValue={this.props.children}>
+        <textarea ref="newText" defaultValue={this.props.note}>
         </textarea>
         <button onClick={() => this.save()}> Save </button>
       </div>
