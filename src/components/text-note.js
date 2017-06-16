@@ -12,8 +12,8 @@ class TextNote extends Component {
       width: '200px',
       padding: '10px',
       position: 'absolute',
-      right: window.innerWidth/2 + 'px',
-      top: window.innerHeight/2 + 'px',
+      // right: window.innerWidth/2 + 'px',
+      // top: window.innerHeight/2 + 'px',
       backgroundColor: 'white',
       boxShadow: '5px 5px 15px 0 rgba(0, 0, 0, .2)'
     }

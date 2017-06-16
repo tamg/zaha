@@ -45,10 +45,18 @@ class App extends Component {
     this.setState({boards, activeBoard})
   }
 
+  changeBoard(id) {
+    this.state.boards.forEach((board) => {
+      if(board.id === id) {
+        var activeBoard = board
+        this.setState({activeBoard})
+      }
+    })
+  }
+
   addNote(text) {
     var activeBoardId = this.state.activeBoard.id
     var boards = this.state.boards.map((board) => {
-      console.log(board.id);
       if(board.id === activeBoardId) {
         var txtNotes = [...board.txtNotes,
         {
@@ -56,9 +64,11 @@ class App extends Component {
           note: text,
           editing: false
         }]
+        board.txtNotes = txtNotes
+        return board
       }
+      return board
     })
-
     this.setState({boards})
   }
 
@@ -111,13 +121,13 @@ class App extends Component {
   render() {
     return (
       <div>
-        <MenuBar
-          addBoard={this.addBoard.bind(this)}
-          addNote={() => this.addNote('New Note')}
-          addImage={() => this.addImage('https://cdn-images-1.medium.com/max/800/1*Cx4fcxgCFGgI3TyL43Ed1g.png')}
-          addSketch={() => this.addSketch()}/>
+        <MenuBar addBoard={this.addBoard.bind(this)}
+                 addNote={() => this.addNote('New Note')}
+                 addImage={() => this.addImage('https://cdn-images-1.medium.com/max/800/1*Cx4fcxgCFGgI3TyL43Ed1g.png')}
+                 addSketch={() => this.addSketch()}/>
 
-        <BoardList boards={this.state.boards} />
+        <BoardList boards={this.state.boards}
+                   changeBoard={this.changeBoard.bind(this)}/>
 
         <Board activeBoard={this.state.activeBoard}
                onToggle={this.onToggle.bind(this)}

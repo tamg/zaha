@@ -2,11 +2,14 @@ import React, { Component } from 'react'
 
 const BoardList = (props) => {
   if(!props.boards){
-    return 
+    return
   }
   var boards = props.boards.map((board) => {
     return(
-      <li key={board.id}> {board.title} </li>
+      <li key={board.id}
+          onClick={() => props.changeBoard(board.id)}>
+          {board.title}
+      </li>
     )
   })
 

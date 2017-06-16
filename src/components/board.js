@@ -11,6 +11,7 @@ class Board extends Component {
     if(!this.props.activeBoard){
       return <div>loading</div>
     } else {
+      console.log('active is ', this.props.activeBoard);
       const activeBoard = this.props.activeBoard
     }
   }
