@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Draggable from 'react-draggable'
 
 class TextNote extends Component {
-  constructor(){
+  constructor(props){
     super()
   }
 
@@ -12,8 +12,8 @@ class TextNote extends Component {
       width: '200px',
       padding: '10px',
       position: 'absolute',
-      // right: window.innerWidth/2 + 'px',
-      // top: window.innerHeight/2 + 'px',
+      right: this.props.position.x + 'px',
+      top: this.props.position.y + 'px',
       backgroundColor: 'white',
       boxShadow: '5px 5px 15px 0 rgba(0, 0, 0, .2)'
     }
@@ -57,7 +57,7 @@ class TextNote extends Component {
 
   //check if we are editing or displaying and display the right render
   render() {
-    return ( <Draggable>
+    return ( <Draggable onDrag={() => this.props.onNoteDrag(this.props.id)}>
               {(this.props.editing) ? this.editMode() : this.displayMode()}
             </Draggable>)
           }

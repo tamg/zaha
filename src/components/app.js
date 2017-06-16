@@ -16,7 +16,11 @@ class App extends Component {
       txtNotes: [{
         id: 0,
         note: 'neeeew note',
-        editing: false
+        editing: false,
+        position: {
+          x: window.innerWidth/2,
+          y: window.innerHeight/2
+        }
       }]
     }
 
@@ -54,6 +58,27 @@ class App extends Component {
     })
   }
 
+  onNoteDrag(e, ui) {
+    console.log(e, ui);
+    // var activeBoardId = this.state.activeBoard.id
+    // var boards = this.state.boards.map((board) => {
+    //   if(board.id === activeBoardId) {
+    //     var txtNotes = [...board.txtNotes]
+    //     txtNotes.forEach((txtNote) => {
+    //       if(txtNote.id === id) {
+    //         const {x, y} = txtNote.position
+    //         txtNote.position.x = x + ui.deltaX
+    //         txtNote.position.y = y + ui.deltaY
+    //       }
+    //     })
+    //     board.txtNotes = txtNotes
+    //     return board
+    //   }
+    //   return board
+    // })
+    // this.setState({boards})
+  }
+
   addNote(text) {
     var activeBoardId = this.state.activeBoard.id
     var boards = this.state.boards.map((board) => {
@@ -62,7 +87,11 @@ class App extends Component {
         {
           id: this.nextId(),
           note: text,
-          editing: false
+          editing: false,
+          position: {
+            x: window.innerWidth/2,
+            y: window.innerHeight/2
+          }
         }]
         board.txtNotes = txtNotes
         return board
@@ -130,6 +159,7 @@ class App extends Component {
                    changeBoard={this.changeBoard.bind(this)}/>
 
         <Board activeBoard={this.state.activeBoard}
+               onNoteDrag={this.onNoteDrag.bind(this)}
                onToggle={this.onToggle.bind(this)}
                onSave={this.onSave.bind(this)}
                onRemove={this.onRemove.bind(this)}/>

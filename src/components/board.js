@@ -20,6 +20,8 @@ class Board extends Component {
     return (<TextNote
               key={txtNote.id}
               id={txtNote.id}
+              position={txtNote.position}
+              onNoteDrag={this.props.onNoteDrag}
               editing={txtNote.editing}
               onToggle={this.props.onToggle}
               onRemove={this.props.onRemove}
