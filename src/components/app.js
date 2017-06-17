@@ -26,7 +26,7 @@ class App extends Component {
 
     this.state = {
       boards: [],
-      activeBoard: board
+      activeBoard: null
     }
   }
 
@@ -36,7 +36,6 @@ class App extends Component {
   }
 
   addBoard() {
-    console.log('adding');
     var boards = [...this.state.boards,
     {
       id: this.nextId(),
@@ -58,25 +57,25 @@ class App extends Component {
     })
   }
 
-  onNoteDrag(e, ui) {
-    console.log(e, ui);
-    // var activeBoardId = this.state.activeBoard.id
-    // var boards = this.state.boards.map((board) => {
-    //   if(board.id === activeBoardId) {
-    //     var txtNotes = [...board.txtNotes]
-    //     txtNotes.forEach((txtNote) => {
-    //       if(txtNote.id === id) {
-    //         const {x, y} = txtNote.position
-    //         txtNote.position.x = x + ui.deltaX
-    //         txtNote.position.y = y + ui.deltaY
-    //       }
-    //     })
-    //     board.txtNotes = txtNotes
-    //     return board
-    //   }
-    //   return board
-    // })
-    // this.setState({boards})
+  onNoteDrag(e, position, id) {
+    // console.log(e, position, id);
+    var activeBoardId = this.state.activeBoard.id
+    var boards = this.state.boards.map((board) => {
+      if(board.id === activeBoardId) {
+        var txtNotes = [...board.txtNotes]
+        txtNotes.forEach((txtNote) => {
+          if(txtNote.id === id) {
+            const {x, y} = position
+            txtNote.position.x = x
+            txtNote.position.y = y
+          }
+        })
+        board.txtNotes = txtNotes
+        return board
+      }
+      return board
+    })
+    this.setState({boards})
   }
 
   addNote(text) {
@@ -89,8 +88,8 @@ class App extends Component {
           note: text,
           editing: false,
           position: {
-            x: window.innerWidth/2,
-            y: window.innerHeight/2
+            x: window.innerWidth/3,
+            y: window.innerHeight/3
           }
         }]
         board.txtNotes = txtNotes
@@ -149,20 +148,31 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div >
+        <div>
+
         <MenuBar addBoard={this.addBoard.bind(this)}
                  addNote={() => this.addNote('New Note')}
                  addImage={() => this.addImage('https://cdn-images-1.medium.com/max/800/1*Cx4fcxgCFGgI3TyL43Ed1g.png')}
                  addSketch={() => this.addSketch()}/>
+        </div>
+
+        <div>
+
 
         <BoardList boards={this.state.boards}
                    changeBoard={this.changeBoard.bind(this)}/>
+               </div>
 
-        <Board activeBoard={this.state.activeBoard}
-               onNoteDrag={this.onNoteDrag.bind(this)}
-               onToggle={this.onToggle.bind(this)}
-               onSave={this.onSave.bind(this)}
-               onRemove={this.onRemove.bind(this)}/>
+      <div style={{height: '100vh'}}>
+         <Board activeBoard={this.state.activeBoard}
+                onNoteDrag={this.onNoteDrag.bind(this)}
+                onToggle={this.onToggle.bind(this)}
+                onSave={this.onSave.bind(this)}
+                onRemove={this.onRemove.bind(this)}/>
+
+       </div>
+
       </div>
 
     )

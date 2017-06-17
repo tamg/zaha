@@ -1,7 +1,16 @@
+html {
+  height: 100%;
+}
+
 body {
   background: rgb(207, 215, 215);
   font-family: monospace;
   font-size: 20px;
+  min-height: 100%;
+}
+
+.container {
+  height: 100%;
 }
 
 .menu {
@@ -12,6 +21,12 @@ body {
 
 .menu li {
   padding: 10px;
+}
+
+.board-list {
+  width: 200px;
+  background: #87d5a9;
+  border: 1px solid black;
 }
 
 .textNote {

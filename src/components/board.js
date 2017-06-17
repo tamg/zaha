@@ -9,10 +9,23 @@ class Board extends Component {
     super(props)
 
     if(!this.props.activeBoard){
+      console.log(this.props.activeBoard);
       return <div>loading</div>
     } else {
-      console.log('active is ', this.props.activeBoard);
       const activeBoard = this.props.activeBoard
+    }
+  }
+
+  componentWillMount() { //set a random mounting position of note right before rendering
+    this.style = {
+      border: '1px solid black',
+      width: '200px',
+      padding: '10px',
+      position: 'absolute',
+      // right: this.props.position.x + 'px',
+      // top: this.props.position.y + 'px',
+      backgroundColor: 'white',
+      boxShadow: '5px 5px 15px 0 rgba(0, 0, 0, .2)'
     }
   }
 
@@ -51,7 +64,7 @@ class Board extends Component {
   render() {
     return (
       <div>
-        <div className="board">
+        <div className="board" style={{height: '100vh', width: '100%', position: 'relative', padding: '10px'}}>
            {this.props.activeBoard.txtNotes.map(this.eachNote, this)}
            {/* {this.props.activeBoard.imageNotes.map(this.eachImage, this)} */}
            {/* {this.props.activeBoard.sketchNotes.map(this.eachSketch, this)} */}

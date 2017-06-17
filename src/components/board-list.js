@@ -4,6 +4,7 @@ const BoardList = (props) => {
   if(!props.boards){
     return
   }
+
   var boards = props.boards.map((board) => {
     return(
       <li key={board.id}

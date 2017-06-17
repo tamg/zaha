@@ -12,8 +12,8 @@ class TextNote extends Component {
       width: '200px',
       padding: '10px',
       position: 'absolute',
-      right: this.props.position.x + 'px',
-      top: this.props.position.y + 'px',
+      // right: this.props.position.x + 'px',
+      // top: this.props.position.y + 'px',
       backgroundColor: 'white',
       boxShadow: '5px 5px 15px 0 rgba(0, 0, 0, .2)'
     }
@@ -30,6 +30,10 @@ class TextNote extends Component {
 
   remove() {
     this.props.onRemove(this.props.id)
+  }
+
+  drag(e, position) { //controlled drag
+    this.props.onNoteDrag(e, position, this.props.id)
   }
 
   editMode() {// render editing form
@@ -57,7 +61,7 @@ class TextNote extends Component {
 
   //check if we are editing or displaying and display the right render
   render() {
-    return ( <Draggable onDrag={() => this.props.onNoteDrag(this.props.id)}>
+    return ( <Draggable bounds="parent" position={this.props.position} onDrag={(e, position) => this.drag(e, position)}>
               {(this.props.editing) ? this.editMode() : this.displayMode()}
             </Draggable>)
           }
