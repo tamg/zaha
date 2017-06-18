@@ -28,6 +28,11 @@ class App extends Component {
       boards: [],
       activeBoard: null
     }
+
+  }
+
+  componentWillMount() {
+    this.addBoard()
   }
 
   nextId() {
@@ -101,16 +106,22 @@ class App extends Component {
   }
 
   onToggle(id){
-    console.log(this);
-    var txtNotes = this.state.boards.txtNotes.map((note) => {
-      if(note.id === id){
-        var currentEditState = note.editing //simplify
-        note.editing = !currentEditState
-        return note
+    var activeBoardId = this.state.activeBoard.id
+    var boards = this.state.boards.map((board) => {
+      if(board.id === activeBoardId) {
+        var txtNotes = [...board.txtNotes]
+        txtNotes.forEach((txtNote) => {
+          if(txtNote.id === id) {
+            var currentEditState = txtNote.editing //simplify
+            txtNote.editing = !currentEditState
+          }
+        })
+        board.txtNotes = txtNotes
+        return board
       }
-      return note
+      return board
     })
-    this.setState({txtNotes})
+    this.setState({boards})
   }
 
   onSave(newText, id){
@@ -158,7 +169,6 @@ class App extends Component {
         </div>
 
         <div>
-
 
         <BoardList boards={this.state.boards}
                    changeBoard={this.changeBoard.bind(this)}/>
