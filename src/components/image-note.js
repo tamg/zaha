@@ -6,22 +6,12 @@ class ImageNote extends Component {
     super()
   }
 
-  componentWillMount() {
-		this.style = {
-			border: '1px solid black',
-			padding: '10px',
-			position: 'absolute',
-			backgroundColor: 'white',
-			boxShadow: '5px 5px 15px 0 rgba(0, 0, 0, .2)'
-		}
-	}
-
   edit() {
     this.props.onImgNoteToggle(this.props.id)
   }
 
   save() {
-    this.props.onImgNoteSave(this.refs.src.value, this.props.id) 
+    this.props.onImgNoteSave(this.refs.src.value, this.props.id)
     this.props.onImgNoteToggle(this.props.id)
   }
 
@@ -35,8 +25,8 @@ class ImageNote extends Component {
 
   editMode() {// render editing form
     return(
-      <div className="imageNote" style={this.style}>
-        <input ref="src" defaultValue={this.props.note}/>
+      <div className="imageNote" >
+        <input ref="src" defaultValue={this.props.src}/>
         <button onClick={() => this.save()}> Save </button>
       </div>
     )
@@ -44,7 +34,7 @@ class ImageNote extends Component {
 
   displayMode() {// render note display
     return (
-      <div className="imageNote" style={this.style}>
+      <div className="imageNote" >
         <div >
           <strong className="cursor"><div className="drag-bar">Drag here</div></strong>
           <img src={this.props.src} height='150' width='150'/>

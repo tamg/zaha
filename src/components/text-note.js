@@ -6,23 +6,12 @@ class TextNote extends Component {
     super()
   }
 
-  componentWillMount() {
-    this.style = {
-      border: '1px solid black',
-      width: '200px',
-      padding: '10px',
-      position: 'absolute',
-      backgroundColor: 'white',
-      boxShadow: '5px 5px 15px 0 rgba(0, 0, 0, .2)'
-    }
-  }
-
   edit() {
     this.props.onTxtNoteToggle(this.props.id)
   }
 
   save() {
-    this.props.onTxtNoteSave(this.refs.newText.value, this.props.id) //whenver note is updated(clicked on save) pass newText and id to parent update function to handle it for us. after update handles newText, it updates the notes array which gets rerenderd
+    this.props.onTxtNoteSave(this.refs.newText.value, this.props.id)
     this.props.onTxtNoteToggle(this.props.id)
   }
 
@@ -36,7 +25,7 @@ class TextNote extends Component {
 
   editMode() {
     return(
-      <div className="note" style={this.style}>
+      <div className="textNote" >
         <textarea ref="newText" defaultValue={this.props.note}>
         </textarea>
         <button onClick={() => this.save()}> Save </button>
@@ -46,7 +35,7 @@ class TextNote extends Component {
 
   displayMode() {
     return (
-      <div className="textNote" style={this.style}>
+      <div className="textNote" >
         <p>{this.props.note}</p>
         <span>
           <button onClick={() => this.edit()}>EDIT</button>

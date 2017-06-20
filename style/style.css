@@ -29,8 +29,13 @@ body {
   border: 1px solid black;
 }
 
-.textNote {
-
+.textNote, .imageNote {
+  border: 1px solid black;
+  width: 200px;
+  padding: 10px;
+  position: absolute;
+  background-color: white;
+  box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2)
 }
 
 .textInput {

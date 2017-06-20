@@ -120,7 +120,7 @@ class App extends Component {
       {
         id: this.nextId(),
         src: '',
-        editing: false,
+        editing: true,
         position: {
           x: window.innerWidth/3,
           y: window.innerHeight/3
