@@ -62,33 +62,21 @@ class App extends Component {
     })
   }
 
-  onNoteDrag(e, position, id) {
-    // console.log(e, position, id);
-    var activeBoardId = this.state.activeBoard.id
-    var boards = this.state.boards.map((board) => {
-      if(board.id === activeBoardId) {
-        var txtNotes = [...board.txtNotes]
-        txtNotes.forEach((txtNote) => {
-          if(txtNote.id === id) {
-            const {x, y} = position
-            txtNote.position.x = x
-            txtNote.position.y = y
-          }
-        })
-        board.txtNotes = txtNotes
-        return board
+  findNote(id) {
+    var txtNote
+    var txtNotes = [...this.state.activeBoard.txtNotes]
+    txtNotes.forEach((note) => {
+      if(note.id === id) {
+        txtNote = note
       }
-      return board
-    })
-    this.setState({boards})
-  }
+  })
+  return txtNote
+}
+
 
   addNote(text) {
-    var activeBoardId = this.state.activeBoard.id
-    var boards = this.state.boards.map((board) => {
-      if(board.id === activeBoardId) {
-        var txtNotes = [...board.txtNotes,
-        {
+    var activeBoard = this.state.activeBoard
+    var txtNotes = [...activeBoard.txtNotes,{
           id: this.nextId(),
           note: text,
           editing: false,
@@ -97,42 +85,42 @@ class App extends Component {
             y: window.innerHeight/3
           }
         }]
-        board.txtNotes = txtNotes
-        return board
-      }
-      return board
-    })
-    this.setState({boards})
+    activeBoard.txtNotes = txtNotes
+    this.setState({activeBoard})
+  }
+
+  onNoteDrag(e, position, id) {
+    var activeBoard = this.state.activeBoard
+    var txtNote = this.findNote(id)
+    const {x, y} = position
+    txtNote.position.x = x
+    txtNote.position.y = y
+    this.setState({activeBoard})
   }
 
   onToggle(id){
-    var activeBoardId = this.state.activeBoard.id
-    var boards = this.state.boards.map((board) => {
-      if(board.id === activeBoardId) {
-        var txtNotes = [...board.txtNotes]
-        txtNotes.forEach((txtNote) => {
-          if(txtNote.id === id) {
-            var currentEditState = txtNote.editing //simplify
-            txtNote.editing = !currentEditState
-          }
-        })
-        board.txtNotes = txtNotes
-        return board
+    var activeBoard = this.state.activeBoard
+    var txtNotes = [...activeBoard.txtNotes]
+    txtNotes.forEach((txtNote) => {
+      if(txtNote.id === id) {
+        var currentEditState = txtNote.editing //simplify
+        txtNote.editing = !currentEditState
       }
-      return board
     })
-    this.setState({boards})
+    activeBoard.txtNotes = txtNotes
+    this.setState({activeBoard})
   }
 
   onSave(newText, id){
-    var txtNotes = this.state.boards.txtNotes.map((note) => {
-      if(note.id === id){
-        note.note = newText
-        return note
+    var activeBoard = this.state.activeBoard
+    var txtNotes = [...activeBoard.txtNotes]
+    txtNotes.forEach((txtNote) => {
+      if(txtNote.id === id) {
+        txtNote.note = newText
       }
-      return note
     })
-    this.setState({txtNotes})
+    activeBoard.txtNotes = txtNotes
+    this.setState({activeBoard})
   }
 
   onRemove(id){
