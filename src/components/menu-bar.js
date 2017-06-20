@@ -5,9 +5,8 @@ const MenuBar = (props) => {
     <div>
       <ul className="menu">
         <li onClick={props.addBoard}> New Board </li>
-        <li onClick={props.addNote}> Text </li>
-        <li onClick={props.addImage}> Image </li>
-        <li onClick={props.addSketch}> Sketch </li>
+        <li onClick={() => props.onAddTxtNote('text')}> Text </li>
+        <li onClick={() => props.onAddImgNote('image')}> Image </li>
       </ul>
     </div>
   )

@@ -6,37 +6,35 @@ class TextNote extends Component {
     super()
   }
 
-  componentWillMount() { //set a random mounting position of note right before rendering
+  componentWillMount() {
     this.style = {
       border: '1px solid black',
       width: '200px',
       padding: '10px',
       position: 'absolute',
-      // right: this.props.position.x + 'px',
-      // top: this.props.position.y + 'px',
       backgroundColor: 'white',
       boxShadow: '5px 5px 15px 0 rgba(0, 0, 0, .2)'
     }
   }
 
   edit() {
-    this.props.onToggle(this.props.id)
+    this.props.onTxtNoteToggle(this.props.id)
   }
 
   save() {
-    this.props.onSave(this.refs.newText.value, this.props.id) //whenver note is updated(clicked on save) pass newText and id to parent update function to handle it for us. after update handles newText, it updates the notes array which gets rerenderd
-    this.props.onToggle(this.props.id)
+    this.props.onTxtNoteSave(this.refs.newText.value, this.props.id) //whenver note is updated(clicked on save) pass newText and id to parent update function to handle it for us. after update handles newText, it updates the notes array which gets rerenderd
+    this.props.onTxtNoteToggle(this.props.id)
   }
 
   remove() {
-    this.props.onRemove(this.props.id)
+    this.props.onTxtNoteRemove(this.props.id)
   }
 
-  drag(e, position) { //controlled drag
-    this.props.onNoteDrag(e, position, this.props.id)
+  drag(e, position) {
+    this.props.onTxtNoteDrag(e, position, this.props.id)
   }
 
-  editMode() {// render editing form
+  editMode() {
     return(
       <div className="note" style={this.style}>
         <textarea ref="newText" defaultValue={this.props.note}>
@@ -44,10 +42,9 @@ class TextNote extends Component {
         <button onClick={() => this.save()}> Save </button>
       </div>
     )
-  }//ref is used to save input text data
-    // when save is called on note component, it passes newText and id to the parent update funtion for an update
+  }
 
-  displayMode() {// render note display
+  displayMode() {
     return (
       <div className="textNote" style={this.style}>
         <p>{this.props.note}</p>
@@ -59,24 +56,11 @@ class TextNote extends Component {
     )
   }
 
-  //check if we are editing or displaying and display the right render
   render() {
     return ( <Draggable bounds="parent" position={this.props.position} onDrag={(e, position) => this.drag(e, position)}>
               {(this.props.editing) ? this.editMode() : this.displayMode()}
             </Draggable>)
           }
   }
-
-  // render(){
-  //   return (
-  //     <Draggable>
-  //       <div className="textNote" style={this.style}>
-  //         <input className="textInput" />
-  //         <button>Add </button>
-  //       </div>
-  //     </Draggable>
-  //   )
-  // }
-
 
 export default TextNote

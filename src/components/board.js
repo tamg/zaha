@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import MenuBar from './menu-bar'
 import TextNote from './text-note'
 import ImageNote from './image-note'
-import SketchNote from './sketch-note'
 
 class Board extends Component {
   constructor(props) {
@@ -28,31 +27,27 @@ class Board extends Component {
               key={txtNote.id}
               id={txtNote.id}
               position={txtNote.position}
-              onNoteDrag={this.props.onNoteDrag}
               editing={txtNote.editing}
-              onToggle={this.props.onToggle}
-              onRemove={this.props.onRemove}
-              onSave={this.props.onSave}
+              onTxtNoteDrag={this.props.onTxtNoteDrag}
+              onTxtNoteToggle={this.props.onTxtNoteToggle}
+              onTxtNoteRemove={this.props.onTxtNoteRemove}
+              onTxtNoteSave={this.props.onTxtNoteSave}
               note={txtNote.note}
             />)
   }
 
-  eachImage(imageNote) {
+  eachImage(imgNote) {
     return (<ImageNote
-              key={imageNote.id}
-              id={imageNote.id}
-              src={imageNote.src}
-              // onToggle={this.onToggle.bind(this)}
-              // onRemove={this.onRemove.bind(this)}
-              // onSave={this.onSave.bind(this)}
+              key={imgNote.id}
+              id={imgNote.id}
+              src={imgNote.src}
+              position={imgNote.position}
+              editing={imgNote.editing}
+              onImgNoteDrag={this.props.onImgNoteDrag}
+              onImgNoteToggle={this.props.onImgNoteToggle}
+              onImgNoteRemove={this.props.onImgNoteRemove}
+              onImgNoteSave={this.props.onImgNoteSave}
             />)
-  }
-
-  eachSketch(sketchNote){
-    return (<SketchNote
-      key={sketchNote.id}
-      id={sketchNote.id}
-      />)
   }
 
   render() {
@@ -63,8 +58,7 @@ class Board extends Component {
 
           <div className="board" style={{height: '100vh', width: '100%', position: 'relative', padding: '10px'}}>
              {this.props.activeBoard.txtNotes.map(this.eachNote, this)}
-             {/* {this.props.activeBoard.imageNotes.map(this.eachImage, this)} */}
-             {/* {this.props.activeBoard.sketchNotes.map(this.eachSketch, this)} */}
+             {this.props.activeBoard.imgNotes.map(this.eachImage, this)}
           </div>
         }
       </div>

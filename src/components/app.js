@@ -4,7 +4,6 @@ import BoardList from './board-list'
 import Board from './board'
 import TextNote from './text-note'
 import ImageNote from './image-note'
-import SketchNote from './sketch-note'
 
 class App extends Component {
   constructor() {
@@ -14,11 +13,10 @@ class App extends Component {
       boards: [],
       activeBoard: null
     }
-
   }
 
   componentWillMount() {
-    // this.addBoard()
+    this.addBoard()
   }
 
   nextId() {
@@ -32,7 +30,7 @@ class App extends Component {
       id: this.nextId(),
       title: `New Board..3`, //rename later
       txtNotes:[],
-      imageNotes:[],
+      imgNotes:[],
       sketchNotes:[]
     }]
     var activeBoard = boards[boards.length-1]
@@ -48,7 +46,7 @@ class App extends Component {
     })
   }
 
-  findNote(id) {
+  findTxtNote(id) {
     var txtNote
     var txtNotes = [...this.state.activeBoard.txtNotes]
     txtNotes.forEach((note) => {
@@ -59,11 +57,11 @@ class App extends Component {
     return txtNote
   }
 
-  addNote(text) {
+  onAddTxtNote() {
     var activeBoard = this.state.activeBoard
     var txtNotes = [...activeBoard.txtNotes,{
           id: this.nextId(),
-          note: text,
+          note: 'New Note',
           editing: false,
           position: {
             x: window.innerWidth/3,
@@ -74,90 +72,121 @@ class App extends Component {
     this.setState({activeBoard})
   }
 
-  onNoteDrag(e, position, id) {
+  onTxtNoteDrag(e, position, id) {
     var activeBoard = this.state.activeBoard
-    var txtNote = this.findNote(id)
+    var txtNote = this.findTxtNote(id)
     const {x, y} = position
     txtNote.position.x = x
     txtNote.position.y = y
     this.setState({activeBoard})
   }
 
-  onToggle(id){
+  onTxtNoteToggle(id){
     var activeBoard = this.state.activeBoard
-    var txtNotes = [...activeBoard.txtNotes]
-    txtNotes.forEach((txtNote) => {
-      if(txtNote.id === id) {
-        var currentEditState = txtNote.editing //simplify
-        txtNote.editing = !currentEditState
-      }
-    })
-    activeBoard.txtNotes = txtNotes
+    var txtNote = this.findTxtNote(id)
+    var currentEditState = txtNote.editing //simplify
+    txtNote.editing = !currentEditState
     this.setState({activeBoard})
   }
 
-  onSave(newText, id){
-
-    var txtNotes = [...activeBoard.txtNotes]
-    txtNotes.forEach((txtNote) => {
-      if(txtNote.id === id) {
-        txtNote.note = newText
-      }
-    })
-    activeBoard.txtNotes = txtNotes
+  onTxtNoteSave(newText, id){
+    var activeBoard = this.state.activeBoard
+    var txtNote = this.findTxtNote(id)
+    txtNote.note = newText
     this.setState({activeBoard})
   }
 
-  onRemove(id){
+  onTxtNoteRemove(id){
     var activeBoard = this.state.activeBoard
     var txtNotes = activeBoard.txtNotes.filter(note => note.id !== id)
     activeBoard.txtNotes = txtNotes
     this.setState({activeBoard})
   }
 
-  addImage(src){
-    var imageNotes = [...this.state.imageNotes,
-        {
-          id: this.nextId(),
-          src: src,
-        }]
-    this.setState({imageNotes})
+  findImgNote(id) {
+    var imgNote
+    var imgNotes = [...this.state.activeBoard.imgNotes]
+    imgNotes.forEach((note) => {
+      if(note.id === id) {
+        imgNote = note
+      }
+    })
+    return imgNote
   }
 
-  addSketch(){
-    var sketchNotes = [...this.state.sketchNotes,
-        {
-          id: this.nextId(),
-        }]
-    this.setState({sketchNotes})
+  onAddImgNote(){
+    var activeBoard = this.state.activeBoard
+    var imgNotes = [...activeBoard.imgNotes,
+      {
+        id: this.nextId(),
+        src: '',
+        editing: false,
+        position: {
+          x: window.innerWidth/3,
+          y: window.innerHeight/3
+        }
+      }]
+    activeBoard.imgNotes = imgNotes
+    this.setState({activeBoard})
+  }
+
+  onImgNoteDrag(e, position, id) {
+    var activeBoard = this.state.activeBoard
+    var imgNote = this.findImgNote(id)
+    const {x, y} = position
+    imgNote.position.x = x
+    imgNote.position.y = y
+    this.setState({activeBoard})
+  }
+
+  onImgNoteToggle(id){
+    var activeBoard = this.state.activeBoard
+    var imgNote = this.findImgNote(id)
+    var currentEditState = imgNote.editing //simplify
+    imgNote.editing = !currentEditState
+    this.setState({activeBoard})
+  }
+
+  onImgNoteSave(src, id){
+    var activeBoard = this.state.activeBoard
+    var imgNote = this.findImgNote(id)
+    imgNote.src = src
+    this.setState({activeBoard})
+  }
+
+  onImgNoteRemove(id){
+    var activeBoard = this.state.activeBoard
+    var imgNotes = activeBoard.imgNotes.filter(note => note.id !== id)
+    activeBoard.imgNotes = imgNotes
+    this.setState({activeBoard})
   }
 
   render() {
     return (
       <div >
-        <div>
-
-        <MenuBar addBoard={this.addBoard.bind(this)}
-                 addNote={() => this.addNote('New Note')}
-                 addImage={() => this.addImage('https://cdn-images-1.medium.com/max/800/1*Cx4fcxgCFGgI3TyL43Ed1g.png')}
-                 addSketch={() => this.addSketch()}/>
+        <div >
+          <MenuBar addBoard={this.addBoard.bind(this)}
+                   onAddTxtNote={this.onAddTxtNote.bind(this)}
+                   onAddImgNote={this.onAddImgNote.bind(this)}/>
         </div>
 
         <div>
+          <BoardList boards={this.state.boards}
+                     activeBoard={this.state.activeBoard}
+                     changeBoard={this.changeBoard.bind(this)}/>
+        </div>
 
-        <BoardList boards={this.state.boards}
-                   activeBoard={this.state.activeBoard}
-                   changeBoard={this.changeBoard.bind(this)}/>
-               </div>
-
-      <div style={{height: '100vh'}}>
-         <Board activeBoard={this.state.activeBoard}
-                onNoteDrag={this.onNoteDrag.bind(this)}
-                onToggle={this.onToggle.bind(this)}
-                onSave={this.onSave.bind(this)}
-                onRemove={this.onRemove.bind(this)}/>
-
-       </div>
+        <div style={{height: '100vh'}}>
+          <Board activeBoard={this.state.activeBoard}
+                 onTxtNoteDrag={this.onTxtNoteDrag.bind(this)}
+                 onTxtNoteToggle={this.onTxtNoteToggle.bind(this)}
+                 onTxtNoteSave={this.onTxtNoteSave.bind(this)}
+                 onTxtNoteRemove={this.onTxtNoteRemove.bind(this)}
+                 onImgNoteDrag={this.onImgNoteDrag.bind(this)}
+                 onImgNoteToggle={this.onImgNoteToggle.bind(this)}
+                 onImgNoteSave={this.onImgNoteSave.bind(this)}
+                 onImgNoteRemove={this.onImgNoteRemove.bind(this)}/>
+        </div>
 
       </div>
 
