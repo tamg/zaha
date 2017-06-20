@@ -10,20 +10,6 @@ class App extends Component {
   constructor() {
     super()
 
-    const board = {
-      id: 0,
-      title: 'default',
-      txtNotes: [{
-        id: 0,
-        note: 'neeeew note',
-        editing: false,
-        position: {
-          x: window.innerWidth/2,
-          y: window.innerHeight/2
-        }
-      }]
-    }
-
     this.state = {
       boards: [],
       activeBoard: null
@@ -69,10 +55,9 @@ class App extends Component {
       if(note.id === id) {
         txtNote = note
       }
-  })
-  return txtNote
-}
-
+    })
+    return txtNote
+  }
 
   addNote(text) {
     var activeBoard = this.state.activeBoard
@@ -112,7 +97,7 @@ class App extends Component {
   }
 
   onSave(newText, id){
-    var activeBoard = this.state.activeBoard
+
     var txtNotes = [...activeBoard.txtNotes]
     txtNotes.forEach((txtNote) => {
       if(txtNote.id === id) {
@@ -124,8 +109,10 @@ class App extends Component {
   }
 
   onRemove(id){
-    var txtNotes = this.state.boards.txtNotes.filter(note => note.id !== id)
-    this.setState({txtNotes: txtNotes})
+    var activeBoard = this.state.activeBoard
+    var txtNotes = activeBoard.txtNotes.filter(note => note.id !== id)
+    activeBoard.txtNotes = txtNotes
+    this.setState({activeBoard})
   }
 
   addImage(src){
