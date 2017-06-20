@@ -32,7 +32,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.addBoard()
+    // this.addBoard()
   }
 
   nextId() {
@@ -44,7 +44,7 @@ class App extends Component {
     var boards = [...this.state.boards,
     {
       id: this.nextId(),
-      title: `New Board`, //rename later
+      title: `New Board..3`, //rename later
       txtNotes:[],
       imageNotes:[],
       sketchNotes:[]
@@ -171,6 +171,7 @@ class App extends Component {
         <div>
 
         <BoardList boards={this.state.boards}
+                   activeBoard={this.state.activeBoard}
                    changeBoard={this.changeBoard.bind(this)}/>
                </div>
 

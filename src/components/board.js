@@ -8,12 +8,6 @@ class Board extends Component {
   constructor(props) {
     super(props)
 
-    if(!this.props.activeBoard){
-      console.log(this.props.activeBoard);
-      return <div>loading</div>
-    } else {
-      const activeBoard = this.props.activeBoard
-    }
   }
 
   componentWillMount() { //set a random mounting position of note right before rendering
@@ -64,11 +58,15 @@ class Board extends Component {
   render() {
     return (
       <div>
-        <div className="board" style={{height: '100vh', width: '100%', position: 'relative', padding: '10px'}}>
-           {this.props.activeBoard.txtNotes.map(this.eachNote, this)}
-           {/* {this.props.activeBoard.imageNotes.map(this.eachImage, this)} */}
-           {/* {this.props.activeBoard.sketchNotes.map(this.eachSketch, this)} */}
-       </div>
+        {
+          !this.props.activeBoard ? <div>Create a new board to start...</div> :
+
+          <div className="board" style={{height: '100vh', width: '100%', position: 'relative', padding: '10px'}}>
+             {this.props.activeBoard.txtNotes.map(this.eachNote, this)}
+             {/* {this.props.activeBoard.imageNotes.map(this.eachImage, this)} */}
+             {/* {this.props.activeBoard.sketchNotes.map(this.eachSketch, this)} */}
+          </div>
+        }
       </div>
     )
   }

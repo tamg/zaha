@@ -8,6 +8,7 @@ const BoardList = (props) => {
   var boards = props.boards.map((board) => {
     return(
       <li key={board.id}
+          style={board.id === props.activeBoard.id ? {color: 'red'} : null}
           onClick={() => props.changeBoard(board.id)}>
           {board.title}
       </li>
