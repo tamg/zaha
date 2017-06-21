@@ -1,27 +1,41 @@
 import React, { Component } from 'react'
 
-const BoardList = (props) => {
-  if(!props.boards){
-    return
+class BoardList extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {value: ''}
+
+    if(!this.props.boards){
+      return
+    }
+
+    this.handleChange = this.handleChange.bind(this)
   }
 
-  var boards = props.boards.map((board) => {
+  eachBoard(board) {
     return(
-      <li key={board.id}
-          style={board.id === props.activeBoard.id ? {color: 'red'} : null}
-          onClick={() => props.changeBoard(board.id)}>
-          {board.title}
-      </li>
+      <option key={board.id}
+              value={board.id}>
+              {board.title}
+      </option>
     )
-  })
+  }
 
-  return(
-    <div>
-      <ul className="board-list">
-        {boards}
-      </ul>
-    </div>
-  )
+  handleChange(event) {
+    this.props.changeBoard(parseInt(event.target.value))
+  }
+
+  render() {
+    return(
+      <form >
+          <label> Current Board:
+          <select  onChange={this.handleChange}>
+            {this.props.boards.map(this.eachBoard, this)}
+          </select>
+        </label>
+      </form>
+    )
+  }
 }
 
 export default BoardList

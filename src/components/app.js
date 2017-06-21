@@ -38,6 +38,7 @@ class App extends Component {
   }
 
   changeBoard(id) {
+    console.log(typeof id)
     this.state.boards.forEach((board) => {
       if(board.id === id) {
         var activeBoard = board
