@@ -34,12 +34,35 @@ body {
 }
 
 .board-list {
-  width: 200px;
-  background: #87d5a9;
-  border: 1px solid black;
+
 }
 
-.textNote, .imageNote {
+.board-list form {
+  margin-left: 10px;
+}
+
+.board-list select {
+  background: transparent;
+  font-size: 15px;
+  border: 1px solid #004e66;
+  width: 210px;
+  margin-left: 8px;
+}
+
+.textNote {
+  font-size: 15px;
+  width: 200px;
+  padding: 10px;
+  position: absolute;
+  background-color: white;
+  box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2)
+}
+
+.textNote:hover {
+  cursor: grabbing;
+}
+
+.imageNote {
   width: 200px;
   padding: 10px;
   position: absolute;

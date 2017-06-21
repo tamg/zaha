@@ -25,10 +25,12 @@ class App extends Component {
   }
 
   addBoard() {
+    this.boardId = this.boardId || 0
+    var newBoardId = this.boardId++
     var boards = [...this.state.boards,
     {
-      id: this.nextId(),
-      title: `New Board..3`, //rename later
+      id: newBoardId,
+      title: `Board ${newBoardId}`, //rename later
       txtNotes:[],
       imgNotes:[],
       sketchNotes:[]
@@ -38,7 +40,6 @@ class App extends Component {
   }
 
   changeBoard(id) {
-    console.log(typeof id)
     this.state.boards.forEach((board) => {
       if(board.id === id) {
         var activeBoard = board

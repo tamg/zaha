@@ -12,6 +12,16 @@ class BoardList extends React.Component {
     this.handleChange = this.handleChange.bind(this)
   }
 
+  componentWillMount() {
+    this.setState({value: this.props.activeBoard.id})
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(JSON.stringify(this.props.activeBoard.id) !== JSON.stringify(nextProps.activeBoard.id)){
+           this.setState({value: nextProps.activeBoard.id})
+    }
+  }
+
   eachBoard(board) {
     return(
       <option key={board.id}
@@ -22,18 +32,22 @@ class BoardList extends React.Component {
   }
 
   handleChange(event) {
-    this.props.changeBoard(parseInt(event.target.value))
+    var value = parseInt(event.target.value)
+    this.props.changeBoard(value)
+    this.setState({value})
   }
 
   render() {
     return(
-      <form >
-          <label> Current Board:
-          <select  onChange={this.handleChange}>
-            {this.props.boards.map(this.eachBoard, this)}
-          </select>
-        </label>
-      </form>
+      <div className='board-list'>
+        <form >
+            <label> Current Board
+            <select  value={this.state.value} onChange={this.handleChange}>
+              {this.props.boards.map(this.eachBoard, this)}
+            </select>
+          </label>
+        </form>
+      </div>
     )
   }
 }
