@@ -63,7 +63,7 @@ class App extends Component {
     var activeBoard = this.state.activeBoard
     var txtNotes = [...activeBoard.txtNotes,{
           id: this.nextId(),
-          note: 'New Note',
+          note: 'Double Click to edit note :)',
           editing: false,
           position: {
             x: window.innerWidth/3,

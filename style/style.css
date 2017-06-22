@@ -43,10 +43,14 @@ body {
 
 .board-list select {
   background: transparent;
-  font-size: 15px;
+  font-size: 20px;
   border: 1px solid #004e66;
+  height: 30px;
   width: 210px;
+  font-family: inherit;
+  font-weight: 600;
   margin-left: 8px;
+  padding: 5px 0px;
 }
 
 .textNote {
@@ -56,6 +60,28 @@ body {
   position: absolute;
   background-color: white;
   box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2)
+}
+
+.textNote p {
+  margin-top: 0px;
+}
+
+.textNote textarea {
+  width: 100%;
+  height: 75%;
+}
+
+.textNote span {
+  display: block;
+}
+
+.textNote span {
+  opacity: 0;
+}
+
+.textNote span:hover {
+  opacity: 1;
+  cursor: -webkit-grabbing;
 }
 
 .textNote:hover {

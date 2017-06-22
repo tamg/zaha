@@ -36,7 +36,7 @@ class TextNote extends Component {
   displayMode() {
     return (
       <div className="textNote" >
-        <p>{this.props.note}</p>
+        <p onDoubleClick={() => this.edit()}>{this.props.note}</p>
         <span>
           <button onClick={() => this.edit()}>EDIT</button>
           <button onClick={() => this.remove()}>X</button>

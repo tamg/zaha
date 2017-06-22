@@ -9,17 +9,8 @@ class Board extends Component {
 
   }
 
-  componentWillMount() { //set a random mounting position of note right before rendering
-    this.style = {
-      border: '1px solid black',
-      width: '200px',
-      padding: '10px',
-      position: 'absolute',
-      // right: this.props.position.x + 'px',
-      // top: this.props.position.y + 'px',
-      backgroundColor: 'white',
-      boxShadow: '5px 5px 15px 0 rgba(0, 0, 0, .2)'
-    }
+  componentWillMount() {
+
   }
 
   eachNote(txtNote) {
@@ -28,6 +19,7 @@ class Board extends Component {
               id={txtNote.id}
               position={txtNote.position}
               editing={txtNote.editing}
+              onDoubleClick={() => console.log('onDoubleClick')}
               onTxtNoteDrag={this.props.onTxtNoteDrag}
               onTxtNoteToggle={this.props.onTxtNoteToggle}
               onTxtNoteRemove={this.props.onTxtNoteRemove}
