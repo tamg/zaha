@@ -35,6 +35,8 @@ class Board extends Component {
               src={imgNote.src}
               position={imgNote.position}
               editing={imgNote.editing}
+              imgWidth={imgNote.imgWidth}
+              imgHeight={imgNote.imgHeight}
               onImgNoteDrag={this.props.onImgNoteDrag}
               onImgNoteToggle={this.props.onImgNoteToggle}
               onImgNoteRemove={this.props.onImgNoteRemove}

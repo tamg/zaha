@@ -88,7 +88,7 @@ body {
   cursor: grabbing;
 }
 
-.imageNote {
+.imageNoteEdit {
   width: 200px;
   padding: 10px;
   position: absolute;
@@ -96,10 +96,54 @@ body {
   box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2)
 }
 
-.textInput {
+.imageNoteDisplay {
+  position: absolute;
+  background-color: white;
+  box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2)
+}
+
+.imageNoteDisplay input {
   width: 100%;
 }
 
-.drag-bar {
-  background: grey;
+.imageNoteDisplay .image-edit {
+  opacity: 0;
+  margin-top: -35px;
+  display: block;
+}
+
+.imageNoteDisplay:hover > .image-edit {
+  padding-left: 5px;
+  opacity: 1;
+}
+
+.imageNoteDisplay .drag-bar {
+  opacity: 0;
+}
+
+/*
+.imageNoteDisplay .cursor {
+  font-size: 0px;
+}
+
+.imageNoteDisplay .cursor:hover {
+  font-size: 20px;
+}*/
+
+.imageNoteDisplay .drag-bar {
+  opacity: 1;
+  font-weight: 400;
+  height: 13px;
+  background: white;
+  cursor: -webkit-grabbing;
+}
+
+.nonDraggableImage {
+  padding: 0px;
+  margin: 0px;
+  -webkit-user-drag: none;
+}
+
+.textInput {
+  width: 100%;
 }

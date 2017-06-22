@@ -10,9 +10,24 @@ class ImageNote extends Component {
     this.props.onImgNoteToggle(this.props.id)
   }
 
+  getImage(url){
+    return new Promise(function(resolve, reject){
+        var img = new Image()
+        img.onload = function(){ resolve(this) }
+        img.onerror = function(){ reject(url) }
+        img.src = url
+    })
+  }
+
   save() {
-    this.props.onImgNoteSave(this.refs.src.value, this.props.id)
-    this.props.onImgNoteToggle(this.props.id)
+    var self = this
+    this.getImage(this.refs.src.value)
+        .then(function(img){
+          var imgHeight = 150
+          var imgWidth = ( img.width / img.height ) * 150
+          self.props.onImgNoteSave(self.refs.src.value, self.props.id, imgWidth, imgHeight)
+          self.props.onImgNoteToggle(self.props.id)
+        })
   }
 
   remove() {
@@ -25,21 +40,25 @@ class ImageNote extends Component {
 
   editMode() {// render editing form
     return(
-      <div className="imageNote" >
+      <div className="imageNoteEdit" >
+        Image url
         <input ref="src" defaultValue={this.props.src}/>
         <button onClick={() => this.save()}> Save </button>
       </div>
     )
   }
 
-  displayMode() {// render note display
+  displayMode() {
+    var { src, imgHeight, imgWidth } = this.props
     return (
-      <div className="imageNote" >
-        <div >
-          <strong className="cursor"><div className="drag-bar">Drag here</div></strong>
-          <img src={this.props.src} height='150' width='150'/>
-        </div>
-        <span>
+      <div className="imageNoteDisplay" >
+          <strong className="cursor">
+            <div className="drag-bar">
+              <img className="nonDraggableImage" src={this.props.src} height={imgHeight} width={imgWidth} />
+
+          </div></strong>
+
+        <span className="image-edit">
           <button onClick={() => this.edit()}>EDIT</button>
           <button onClick={() => this.remove()}>X</button>
         </span>

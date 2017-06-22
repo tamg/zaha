@@ -123,6 +123,8 @@ class App extends Component {
         id: this.nextId(),
         src: '',
         editing: true,
+        imgWidth: null,
+        imgHeight: null,
         position: {
           x: window.innerWidth/3,
           y: window.innerHeight/3
@@ -149,10 +151,12 @@ class App extends Component {
     this.setState({activeBoard})
   }
 
-  onImgNoteSave(src, id){
+  onImgNoteSave(src, id, imgWidth, imgHeight){
     var activeBoard = this.state.activeBoard
     var imgNote = this.findImgNote(id)
     imgNote.src = src
+    imgNote.imgHeight = imgHeight + 'px'
+    imgNote.imgWidth = imgWidth + 'px'
     this.setState({activeBoard})
   }
 
