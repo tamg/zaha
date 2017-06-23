@@ -57,7 +57,7 @@ body {
   font-size: 15px;
   width: 200px;
   padding: 10px;
-  position: absolute;
+  position: relative;
   background-color: white;
   box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2)
 }
@@ -87,6 +87,25 @@ body {
 
 .textNote:hover {
   cursor: grabbing;
+}
+
+.textNoteEdit {
+  position: absolute;
+}
+
+
+
+.textNoteEdit .github-picker {
+  position: relative;
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  border: none;
+}
+
+.textNoteEdit .color-picker {
+  float: right;
+  margin-top: -35px;
 }
 
 .imageNoteEdit {

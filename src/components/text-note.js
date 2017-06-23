@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import Draggable from 'react-draggable'
+import { GithubPicker } from 'react-color'
+
 
 class TextNote extends Component {
   constructor(props){
@@ -31,11 +33,17 @@ class TextNote extends Component {
   }
 
   editMode() {
+    const colors = ['#DB3E00', '#FCCB00', '#008B02', '#1273DE', '#5300EB']
     return(
-      <div className="textNote" >
-        <textarea ref="newText" defaultValue={this.props.note}>
-        </textarea>
-        <button onClick={() => this.save()}> Save </button>
+      <div className="textNoteEdit">
+        <div className="textNote" >
+          <textarea ref="newText" defaultValue={this.props.note}>
+          </textarea>
+          <button onClick={() => this.save()}> Save </button>
+        </div >
+        <div className="color-picker">
+          <GithubPicker width='85px' colors={colors} triangle='hide'/>
+        </div>
       </div>
     )
   }
