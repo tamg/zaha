@@ -44,7 +44,7 @@ class Board extends Component {
     return (
       <div>
         {
-          !this.props.activeBoard ? <div>Create a new board to start...</div> :
+          !this.props.activeBoard ? <div className="no-board">Add a board to start...</div> :
 
           <div className="board" style={{height: '100vh', width: '100%', position: 'relative', padding: '10px'}}>
              {this.props.activeBoard.txtNotes.map(this.eachNote, this)}

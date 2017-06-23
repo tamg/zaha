@@ -5,19 +5,21 @@ class BoardList extends React.Component {
     super(props)
     this.state = {value: ''}
 
-    if(!this.props.activeBoard){
-      return
-    }
+
 
     this.handleChange = this.handleChange.bind(this)
   }
 
   componentWillMount() {
+    if(!this.props.activeBoard){
+      console.log('none');
+      return
+    }
     this.setState({value: this.props.activeBoard.id})
   }
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.activeBoard) {
+    if(this.props.activeBoard && nextProps) {
       if(JSON.stringify(this.props.activeBoard.id) !== JSON.stringify(nextProps.activeBoard.id)){
         this.setState({value: nextProps.activeBoard.id})
       }

@@ -16,7 +16,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.addBoard()
+    // this.addBoard()
   }
 
   nextId() {
