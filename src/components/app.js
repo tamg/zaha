@@ -72,6 +72,7 @@ class App extends Component {
           id: this.nextId(),
           note: 'Drag to move or Double Click to edit note :)',
           editing: false,
+          color: '#db3e00',
           position: {
             x: 160,
             y: 30
@@ -109,6 +110,14 @@ class App extends Component {
     var activeBoard = this.state.activeBoard
     var txtNotes = activeBoard.txtNotes.filter(note => note.id !== id)
     activeBoard.txtNotes = txtNotes
+    this.setState({activeBoard})
+  }
+
+
+  onColorChange(color, id) {
+    var activeBoard = this.state.activeBoard
+    var txtNote = this.findTxtNote(id)
+    txtNote.color = color
     this.setState({activeBoard})
   }
 
@@ -197,6 +206,7 @@ class App extends Component {
                  onTxtNoteToggle={this.onTxtNoteToggle.bind(this)}
                  onTxtNoteSave={this.onTxtNoteSave.bind(this)}
                  onTxtNoteRemove={this.onTxtNoteRemove.bind(this)}
+                 onColorChange={this.onColorChange.bind(this)}
                  onImgNoteDrag={this.onImgNoteDrag.bind(this)}
                  onImgNoteToggle={this.onImgNoteToggle.bind(this)}
                  onImgNoteSave={this.onImgNoteSave.bind(this)}

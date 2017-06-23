@@ -15,11 +15,12 @@ class Board extends Component {
               id={txtNote.id}
               position={txtNote.position}
               editing={txtNote.editing}
-              onDoubleClick={() => console.log('onDoubleClick')}
               onTxtNoteDrag={this.props.onTxtNoteDrag}
               onTxtNoteToggle={this.props.onTxtNoteToggle}
               onTxtNoteRemove={this.props.onTxtNoteRemove}
               onTxtNoteSave={this.props.onTxtNoteSave}
+              onColorChange={this.props.onColorChange}
+              color={txtNote.color}
               note={txtNote.note}
             />)
   }

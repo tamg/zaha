@@ -5,7 +5,7 @@ import { GithubPicker } from 'react-color'
 
 class TextNote extends Component {
   constructor(props){
-    super()
+    super(props)
   }
 
   componentDidUpdate() {
@@ -32,25 +32,31 @@ class TextNote extends Component {
     this.props.onTxtNoteDrag(e, position, this.props.id)
   }
 
+  changeColor(color) {
+  this.props.onColorChange(color.hex, this.props.id)
+  }
+
   editMode() {
     const colors = ['#DB3E00', '#FCCB00', '#008B02', '#1273DE', '#5300EB']
+    const style = { borderTop: `7px solid ${this.props.color}`} //highlight color at the top of note
+    console.log(style);
     return(
-      <div className="textNoteEdit">
-        <div className="textNote" >
-          <textarea ref="newText" defaultValue={this.props.note}>
-          </textarea>
+      <div className="textNoteEditContainer">
+        <div style={style} className="textNoteEdit">
+          <textarea ref="newText" defaultValue={this.props.note}></textarea>
           <button onClick={() => this.save()}> Save </button>
         </div >
-        <div className="color-picker">
-          <GithubPicker width='85px' colors={colors} triangle='hide'/>
+        <div className="colorPicker">
+          <GithubPicker width='85px' colors={colors} triangle='hide' onChangeComplete={ (color) => this.changeColor(color)}/>
         </div>
       </div>
     )
   }
 
   displayMode() {
+    const style = { borderTop: `7px solid ${this.props.color}`} //highlight color at the top of note
     return (
-      <div className="textNote" >
+      <div style={style} className="textNoteDisplay" >
         <p onDoubleClick={() => this.edit()}>{this.props.note}</p>
         <span>
           <button onClick={() => this.edit()}>EDIT</button>
