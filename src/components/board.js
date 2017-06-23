@@ -9,10 +9,6 @@ class Board extends Component {
 
   }
 
-  componentWillMount() {
-
-  }
-
   eachNote(txtNote) {
     return (<TextNote
               key={txtNote.id}

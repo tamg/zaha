@@ -30,12 +30,19 @@ class App extends Component {
     var boards = [...this.state.boards,
     {
       id: newBoardId,
-      title: `Board ${newBoardId}`, //rename later
+      title: `Board ${newBoardId}`,
       txtNotes:[],
       imgNotes:[],
       sketchNotes:[]
     }]
     var activeBoard = boards[boards.length-1]
+    this.setState({boards, activeBoard})
+  }
+
+  deleteBoard(id) {
+    if(this.state.boards.length === 1) { return } //always leave one board displayed
+    var boards = [...this.state.boards].filter(board => board.id !== id)
+    var activeBoard = boards.length === 1 ? boards[0] : boards[boards.length-1]
     this.setState({boards, activeBoard})
   }
 
@@ -63,11 +70,11 @@ class App extends Component {
     var activeBoard = this.state.activeBoard
     var txtNotes = [...activeBoard.txtNotes,{
           id: this.nextId(),
-          note: 'Double Click to edit note :)',
+          note: 'Drag to move or Double Click to edit note :)',
           editing: false,
           position: {
-            x: window.innerWidth/3,
-            y: window.innerHeight/3
+            x: 160,
+            y: 30
           }
         }]
     activeBoard.txtNotes = txtNotes
@@ -126,8 +133,8 @@ class App extends Component {
         imgWidth: null,
         imgHeight: null,
         position: {
-          x: window.innerWidth/3,
-          y: window.innerHeight/3
+          x: 160,
+          y: 30
         }
       }]
     activeBoard.imgNotes = imgNotes
@@ -171,7 +178,9 @@ class App extends Component {
     return (
       <div >
         <div >
-          <MenuBar addBoard={this.addBoard.bind(this)}
+          <MenuBar activeBoard={this.state.activeBoard}
+                   addBoard={this.addBoard.bind(this)}
+                   deleteBoard={this.deleteBoard.bind(this)}
                    onAddTxtNote={this.onAddTxtNote.bind(this)}
                    onAddImgNote={this.onAddImgNote.bind(this)}/>
         </div>

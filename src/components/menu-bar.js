@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 
 const MenuBar = (props) => {
   return(
-    <div>
-      <ul className="menu" >
-        <li onClick={props.addBoard}> + New Board </li>
+    <div className="menu" >
+      <ul >
+        <li onClick={props.addBoard}> + Board </li>
+        <li onClick={() => props.deleteBoard(props.activeBoard.id)}> - Board </li>
         <li onClick={() => props.onAddTxtNote('text')}> + Text </li>
         <li onClick={() => props.onAddImgNote('image')}> + Image </li>
       </ul>

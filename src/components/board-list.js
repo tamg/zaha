@@ -5,7 +5,7 @@ class BoardList extends React.Component {
     super(props)
     this.state = {value: ''}
 
-    if(!this.props.boards){
+    if(!this.props.activeBoard){
       return
     }
 
@@ -17,8 +17,10 @@ class BoardList extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(JSON.stringify(this.props.activeBoard.id) !== JSON.stringify(nextProps.activeBoard.id)){
-           this.setState({value: nextProps.activeBoard.id})
+    if(this.props.activeBoard) {
+      if(JSON.stringify(this.props.activeBoard.id) !== JSON.stringify(nextProps.activeBoard.id)){
+        this.setState({value: nextProps.activeBoard.id})
+      }
     }
   }
 

@@ -6,6 +6,13 @@ class TextNote extends Component {
     super()
   }
 
+  componentDidUpdate() {
+    if (this.props.editing) {
+        this.refs.newText.focus()
+        this.refs.newText.select()
+    }
+  }
+
   edit() {
     this.props.onTxtNoteToggle(this.props.id)
   }

@@ -6,6 +6,13 @@ class ImageNote extends Component {
     super()
   }
 
+  componentDidUpdate() {
+    if (this.props.editing) {
+        this.refs.src.focus()
+        this.refs.src.select()
+    }
+  }
+
   edit() {
     this.props.onImgNoteToggle(this.props.id)
   }
@@ -41,9 +48,12 @@ class ImageNote extends Component {
   editMode() {// render editing form
     return(
       <div className="imageNoteEdit" >
-        Image url
-        <input ref="src" defaultValue={this.props.src}/>
-        <button onClick={() => this.save()}> Save </button>
+        <strong className="cursor">
+          <p className="url">Image url</p>
+          <input ref="src" defaultValue={this.props.src}/>
+          <button onClick={() => this.save()}> Save </button>
+          <button onClick={() => this.remove()}>X</button>
+        </strong>
       </div>
     )
   }
@@ -55,8 +65,8 @@ class ImageNote extends Component {
           <strong className="cursor">
             <div className="drag-bar">
               <img className="nonDraggableImage" src={this.props.src} height={imgHeight} width={imgWidth} />
-
-          </div></strong>
+            </div>
+          </strong>
 
         <span className="image-edit">
           <button onClick={() => this.edit()}>EDIT</button>
