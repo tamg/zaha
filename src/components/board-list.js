@@ -43,7 +43,7 @@ class BoardList extends React.Component {
 
   render() {
     return(
-      <div className='board-list'>
+      <div className='boardList'>
         <form >
             <label> Current Board
             <select  value={this.state.value} onChange={this.handleChange}>

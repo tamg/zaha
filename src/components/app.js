@@ -186,21 +186,25 @@ class App extends Component {
   render() {
     return (
       <div >
-        <div >
-          <MenuBar activeBoard={this.state.activeBoard}
-                   addBoard={this.addBoard.bind(this)}
-                   deleteBoard={this.deleteBoard.bind(this)}
-                   onAddTxtNote={this.onAddTxtNote.bind(this)}
-                   onAddImgNote={this.onAddImgNote.bind(this)}/>
+        <div className="header">
+          <div className="boardListContainer">
+            <BoardList boards={this.state.boards}
+                       activeBoard={this.state.activeBoard}
+                       changeBoard={this.changeBoard.bind(this)}/>
+          </div>
+
+          <div className="menuContainer">
+            <MenuBar activeBoard={this.state.activeBoard}
+                     addBoard={this.addBoard.bind(this)}
+                     deleteBoard={this.deleteBoard.bind(this)}
+                     onAddTxtNote={this.onAddTxtNote.bind(this)}
+                     onAddImgNote={this.onAddImgNote.bind(this)}/>
+          </div>
         </div>
 
-        <div>
-          <BoardList boards={this.state.boards}
-                     activeBoard={this.state.activeBoard}
-                     changeBoard={this.changeBoard.bind(this)}/>
-        </div>
 
         <div style={{height: '100vh'}}>
+          <div className="boardTitle"><p> {this.state.activeBoard.title}</p></div>
           <Board activeBoard={this.state.activeBoard}
                  onTxtNoteDrag={this.onTxtNoteDrag.bind(this)}
                  onTxtNoteToggle={this.onTxtNoteToggle.bind(this)}

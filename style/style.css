@@ -11,6 +11,16 @@ body {
 
 .container {
   height: 100%;
+  min-width: 500px;
+}
+
+
+.header {
+  text-align: center;
+}
+
+.menuContainer {
+  display: inline-block;
 }
 
 .menu ul {
@@ -33,24 +43,43 @@ body {
   cursor: pointer;
 }
 
-.no-board {
-  padding: 10px;
+
+.boardListContainer {
+  display: inline-block;
+  color: #004e66;
+  margin-left: 10px;
+  padding: 9px;
+  border: 1px solid #004e66;
+  border-radius: 5px;
 }
 
-.board-list form {
+.boardList form {
   margin-left: 10px;
 }
 
-.board-list select {
+.boardList select {
   background: transparent;
+  color: #004e66;
   font-size: 20px;
-  border: 1px solid #004e66;
-  height: 30px;
-  width: 210px;
+  border: none;
+  /*width: 210px;*/
   font-family: inherit;
   font-weight: 600;
   margin-left: 8px;
   padding: 5px 0px;
+}
+
+.noBoard {
+  padding: 10px;
+}
+
+.boardTitle {
+  text-align: center;
+  font-size: 25px;
+}
+
+.boardTitle p {
+  margin: 0px;
 }
 
 .textNoteEditContainer {

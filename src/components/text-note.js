@@ -39,7 +39,6 @@ class TextNote extends Component {
   editMode() {
     const colors = ['#DB3E00', '#FCCB00', '#008B02', '#1273DE', '#5300EB']
     const style = { borderTop: `7px solid ${this.props.color}`} //highlight color at the top of note
-    console.log(style);
     return(
       <div className="textNoteEditContainer">
         <div style={style} className="textNoteEdit">
