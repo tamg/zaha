@@ -117,23 +117,14 @@ body {
   -webkit-user-drag: none;
 }
 
-
-
 .textNoteEdit:hover {
   cursor: grabbing;
 }
 
-/*.textNoteEdit .github-picker {
-  position: absolute;
-  padding: 5px;
-  display: flex;
-  flex-wrap: wrap;
-  border: none;
-}*/
-
 .textNoteEditContainer .colorPicker {
   float: right;
   margin-top: -35px;
+  padding-right: 5px;
 }
 
 .textNoteDisplay {
@@ -160,7 +151,7 @@ body {
   padding: 10px;
   position: absolute;
   background-color: white;
-  box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2)
+  box-shadow: 5px 5px 15px 0 rgba(0, 0, 0, .2);
   -webkit-user-drag: none;
 }
 
@@ -169,7 +160,6 @@ body {
   margin: 0px;
   cursor: -webkit-grabbing;
 }
-
 
 .imageNoteDisplay {
   position: absolute;

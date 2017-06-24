@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.addBoard()
+    // this.addBoard()
   }
 
   nextId() {
@@ -212,11 +212,9 @@ class App extends Component {
             <BoardTitle activeBoard={this.state.activeBoard}
                         onTitleChange={this.onTitleChange.bind(this)}/>
           </div>
-
         </div>
 
-
-        <div style={{height: '100vh'}}>
+        <div className="boardContainer" style={{height: '100vh'}}>
           <Board activeBoard={this.state.activeBoard}
                  onTxtNoteDrag={this.onTxtNoteDrag.bind(this)}
                  onTxtNoteToggle={this.onTxtNoteToggle.bind(this)}
@@ -228,9 +226,7 @@ class App extends Component {
                  onImgNoteSave={this.onImgNoteSave.bind(this)}
                  onImgNoteRemove={this.onImgNoteRemove.bind(this)}/>
         </div>
-
       </div>
-
     )
   }
 }

@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 
 class BoardTitle extends Component {
   constructor(props){
-    super()
+    super(props)
 
-    this.state = {
-      editing: false
-    }
+    this.state = { editing: false }
   }
 
   componentDidUpdate() {
@@ -50,7 +48,10 @@ class BoardTitle extends Component {
   render() {
     return (
       <div className="boardTitle">
-        {this.state.editing ? this.editMode() : this.displayMode()}
+        {
+          !this.props.activeBoard ? <div className="noBoard">Add a board to start...</div> :
+          this.state.editing ? this.editMode() : this.displayMode()
+        }
       </div>
     )
   }
