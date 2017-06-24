@@ -14,7 +14,6 @@ body {
   min-width: 500px;
 }
 
-
 .header {
   text-align: center;
 }
@@ -43,7 +42,6 @@ body {
   cursor: pointer;
 }
 
-
 .boardListContainer {
   display: inline-block;
   color: #004e66;
@@ -62,11 +60,12 @@ body {
   color: #004e66;
   font-size: 20px;
   border: none;
-  /*width: 210px;*/
+  width: 120px;
   font-family: inherit;
   font-weight: 600;
   margin-left: 8px;
   padding: 5px 0px;
+  /*max-width: 120px;*/
 }
 
 .noBoard {
@@ -80,6 +79,19 @@ body {
 
 .boardTitle p {
   margin: 0px;
+}
+
+.boardTitleDisplay:hover {
+  display: inline-block;
+  padding: 0px 15px;
+  background-color: #E0E0E0;
+}
+
+.boardTitleEdit input {
+  border: none;
+  font-size: inherit;
+  font-family: inherit;
+  text-align: center;
 }
 
 .textNoteEditContainer {
@@ -173,7 +185,7 @@ body {
   display: block;
 }
 
-.imageNoteDisplay:hover > .image-edit {
+.imageNoteDisplay:hover .image-edit {
   padding-left: 10px;
   opacity: 1;
 }

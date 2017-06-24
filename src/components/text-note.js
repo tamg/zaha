@@ -15,6 +15,10 @@ class TextNote extends Component {
     }
   }
 
+  _handleKeyPress(e) {
+    e.key === 'Enter' ? this.save() : null
+  }
+
   edit() {
     this.props.onTxtNoteToggle(this.props.id)
   }
@@ -42,7 +46,7 @@ class TextNote extends Component {
     return(
       <div className="textNoteEditContainer">
         <div style={style} className="textNoteEdit">
-          <textarea ref="newText" defaultValue={this.props.note}></textarea>
+          <textarea ref="newText" defaultValue={this.props.note} onKeyPress={this._handleKeyPress.bind(this)}></textarea>
           <button onClick={() => this.save()}> Save </button>
         </div >
         <div className="colorPicker">
@@ -56,7 +60,7 @@ class TextNote extends Component {
     const style = { borderTop: `7px solid ${this.props.color}`} //highlight color at the top of note
     return (
       <div style={style} className="textNoteDisplay" >
-        <p onDoubleClick={() => this.edit()}>{this.props.note}</p>
+        <p onDoubleClick={() => this.edit()} title="Double click to edit">{this.props.note}</p>
         <span>
           <button onClick={() => this.edit()}>EDIT</button>
           <button onClick={() => this.remove()}>X</button>

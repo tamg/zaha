@@ -6,11 +6,22 @@ class ImageNote extends Component {
     super()
   }
 
+  componentDidMount() {
+    if (this.props.editing) {
+        this.refs.src.focus()
+        this.refs.src.select()
+    }
+  }
+
   componentDidUpdate() {
     if (this.props.editing) {
         this.refs.src.focus()
         this.refs.src.select()
     }
+  }
+
+  _handleKeyPress(e) {
+    e.key === 'Enter' ? this.save() : null
   }
 
   edit() {
@@ -50,7 +61,7 @@ class ImageNote extends Component {
       <div className="imageNoteEdit" >
         <strong className="cursor">
           <p className="url">Image url</p>
-          <input ref="src" defaultValue={this.props.src}/>
+          <input ref="src" defaultValue={this.props.src} onKeyPress={this._handleKeyPress.bind(this)}/>
           <button onClick={() => this.save()}> Save </button>
           <button onClick={() => this.remove()}>X</button>
         </strong>

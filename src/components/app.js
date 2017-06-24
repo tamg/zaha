@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import MenuBar from './menu-bar'
 import BoardList from './board-list'
+import BoardTitle from './board-title'
 import Board from './board'
 import TextNote from './text-note'
 import ImageNote from './image-note'
@@ -21,7 +22,7 @@ class App extends Component {
 
   nextId() {
     this.uniqueId = this.uniqueId || 0 //first element gets 1 and uniqueId gets set to 0.
-    return this.uniqueId++
+    return this.uniqueId++;
   }
 
   addBoard() {
@@ -53,6 +54,12 @@ class App extends Component {
         this.setState({activeBoard})
       }
     })
+  }
+
+  onTitleChange(newText, id) {
+    var activeBoard = this.state.activeBoard
+    activeBoard.title = newText
+    this.setState({activeBoard})
   }
 
   findTxtNote(id) {
@@ -200,11 +207,16 @@ class App extends Component {
                      onAddTxtNote={this.onAddTxtNote.bind(this)}
                      onAddImgNote={this.onAddImgNote.bind(this)}/>
           </div>
+
+          <div className="boardTitle">
+            <BoardTitle activeBoard={this.state.activeBoard}
+                        onTitleChange={this.onTitleChange.bind(this)}/>
+          </div>
+
         </div>
 
 
         <div style={{height: '100vh'}}>
-          <div className="boardTitle"><p> {this.state.activeBoard.title}</p></div>
           <Board activeBoard={this.state.activeBoard}
                  onTxtNoteDrag={this.onTxtNoteDrag.bind(this)}
                  onTxtNoteToggle={this.onTxtNoteToggle.bind(this)}
