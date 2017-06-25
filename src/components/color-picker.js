@@ -36,10 +36,6 @@ export const ColorPicker = ({ width, colors, onChange, onSwatchHover, triangle }
     'default': {
       card: {
         width,
-        // background: '#fff',
-        // border: '1px solid rgba(0,0,0,0.2)',
-        // boxShadow: '0 3px 12px rgba(0,0,0,0.15)',
-        // borderRadius: '4px',
         position: 'relative',
         padding: '5px',
         display: 'flex',
