@@ -18,15 +18,27 @@ class App extends Component {
 
   componentWillMount() {
     // this.addBoard()
+    const boards = this.getFromLocalStorage('boards') || []
+    const activeBoard = this.getFromLocalStorage('activeBoard') || null
+    this.setState({boards, activeBoard})
+    console.log(boards);
   }
 
   nextId() {
-    this.uniqueId = this.uniqueId || 0 //first element gets 1 and uniqueId gets set to 0.
+    this.uniqueId = this.uniqueId || 0
     return this.uniqueId++;
   }
 
+  saveToLocalStorage(key, item){
+    return localStorage.setItem(key, JSON.stringify(item))
+  }
+
+  getFromLocalStorage(key){
+    return JSON.parse(localStorage.getItem(key))
+  }
+
   addBoard() {
-    this.boardId = this.boardId || 1
+    this.boardId = this.state.boards.length + 1 || 1
     var newBoardId = this.boardId++
     var boards = [...this.state.boards,
     {
@@ -37,6 +49,8 @@ class App extends Component {
       sketchNotes:[]
     }]
     var activeBoard = boards[boards.length-1]
+    this.saveToLocalStorage('boards', boards)
+    this.saveToLocalStorage('activeBoard', activeBoard)
     this.setState({boards, activeBoard})
   }
 
@@ -44,6 +58,8 @@ class App extends Component {
     if(this.state.boards.length === 1) { return } //always leave one board displayed
     var boards = [...this.state.boards].filter(board => board.id !== id)
     var activeBoard = boards.length === 1 ? boards[0] : boards[boards.length-1]
+    this.saveToLocalStorage('boards', boards)
+    this.saveToLocalStorage('activeBoard', activeBoard)
     this.setState({boards, activeBoard})
   }
 
@@ -51,6 +67,7 @@ class App extends Component {
     this.state.boards.forEach((board) => {
       if(board.id === id) {
         var activeBoard = board
+        this.saveToLocalStorage('activeBoard', activeBoard)
         this.setState({activeBoard})
       }
     })
@@ -59,6 +76,7 @@ class App extends Component {
   onTitleChange(newText, id) {
     var activeBoard = this.state.activeBoard
     activeBoard.title = newText
+    this.saveToLocalStorage('activeBoard', activeBoard)
     this.setState({activeBoard})
   }
 
@@ -86,6 +104,9 @@ class App extends Component {
           }
         }]
     activeBoard.txtNotes = txtNotes
+    this.saveToLocalStorage('activeBoard', activeBoard)
+    console.log(this.getFromLocalStorage('activeBoard'))
+
     this.setState({activeBoard})
   }
 
@@ -95,6 +116,7 @@ class App extends Component {
     const {x, y} = position
     txtNote.position.x = x
     txtNote.position.y = y
+    this.saveToLocalStorage('activeBoard', activeBoard)
     this.setState({activeBoard})
   }
 
@@ -103,6 +125,7 @@ class App extends Component {
     var txtNote = this.findTxtNote(id)
     var currentEditState = txtNote.editing //simplify
     txtNote.editing = !currentEditState
+    this.saveToLocalStorage('activeBoard', activeBoard)
     this.setState({activeBoard})
   }
 
@@ -110,6 +133,8 @@ class App extends Component {
     var activeBoard = this.state.activeBoard
     var txtNote = this.findTxtNote(id)
     txtNote.note = newText
+    this.saveToLocalStorage('activeBoard', activeBoard)
+    console.log(this.getFromLocalStorage('activeBoard')[0])
     this.setState({activeBoard})
   }
 
@@ -117,6 +142,7 @@ class App extends Component {
     var activeBoard = this.state.activeBoard
     var txtNotes = activeBoard.txtNotes.filter(note => note.id !== id)
     activeBoard.txtNotes = txtNotes
+    this.saveToLocalStorage('activeBoard', activeBoard)
     this.setState({activeBoard})
   }
 
@@ -125,6 +151,7 @@ class App extends Component {
     var activeBoard = this.state.activeBoard
     var txtNote = this.findTxtNote(id)
     txtNote.color = color
+    this.saveToLocalStorage('activeBoard', activeBoard)
     this.setState({activeBoard})
   }
 
@@ -154,6 +181,7 @@ class App extends Component {
         }
       }]
     activeBoard.imgNotes = imgNotes
+    this.saveToLocalStorage('activeBoard', activeBoard)
     this.setState({activeBoard})
   }
 
@@ -163,6 +191,7 @@ class App extends Component {
     const {x, y} = position
     imgNote.position.x = x
     imgNote.position.y = y
+    this.saveToLocalStorage('activeBoard', activeBoard)
     this.setState({activeBoard})
   }
 
@@ -171,6 +200,7 @@ class App extends Component {
     var imgNote = this.findImgNote(id)
     var currentEditState = imgNote.editing //simplify
     imgNote.editing = !currentEditState
+    this.saveToLocalStorage('activeBoard', activeBoard)
     this.setState({activeBoard})
   }
 
@@ -180,6 +210,7 @@ class App extends Component {
     imgNote.src = src
     imgNote.imgHeight = imgHeight + 'px'
     imgNote.imgWidth = imgWidth + 'px'
+    this.saveToLocalStorage('activeBoard', activeBoard)
     this.setState({activeBoard})
   }
 
@@ -187,10 +218,13 @@ class App extends Component {
     var activeBoard = this.state.activeBoard
     var imgNotes = activeBoard.imgNotes.filter(note => note.id !== id)
     activeBoard.imgNotes = imgNotes
+    this.saveToLocalStorage('activeBoard', activeBoard)
     this.setState({activeBoard})
   }
 
   render() {
+
+
     return (
       <div >
         <div className="header">

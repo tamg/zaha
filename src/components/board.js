@@ -6,7 +6,19 @@ import ImageNote from './image-note'
 class Board extends Component {
   constructor(props) {
     super(props)
+  }
 
+  componentWillMount(){
+    this.activeBoard = this.props.activeBoard
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if(this.props.activeBoard && nextProps) {
+      if(JSON.stringify(this.props.activeBoard) !== JSON.stringify(nextProps.activeBoard)){
+        console.log('not equal from board comp');
+        this.activeBoard = nextProps.activeBoard
+      }
+    }
   }
 
   eachNote(txtNote) {
@@ -45,11 +57,11 @@ class Board extends Component {
     return (
       <div>
         {
-          !this.props.activeBoard ? '' : //no board available to render 
+          !this.activeBoard ? '' : //no board available to render
 
           <div className="board" style={{height: '100vh', width: '100%', position: 'relative', padding: '10px'}}>
-            {this.props.activeBoard.txtNotes.map(this.eachNote, this)}
-            {this.props.activeBoard.imgNotes.map(this.eachImage, this)}
+            {this.activeBoard.txtNotes.map(this.eachNote, this)}
+            {this.activeBoard.imgNotes.map(this.eachImage, this)}
           </div>
         }
       </div>
