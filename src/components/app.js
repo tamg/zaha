@@ -26,7 +26,7 @@ class App extends Component {
   }
 
   addBoard() {
-    this.boardId = this.boardId || 0
+    this.boardId = this.boardId || 1
     var newBoardId = this.boardId++
     var boards = [...this.state.boards,
     {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Draggable from 'react-draggable'
-import { GithubPicker } from 'react-color'
+// import { ColorPicker } from 'react-color'
+import ColorPicker from './color-picker'
 
 
 class TextNote extends Component {
@@ -48,9 +49,9 @@ class TextNote extends Component {
         <div style={style} className="textNoteEdit">
           <textarea ref="newText" defaultValue={this.props.note} onKeyPress={this._handleKeyPress.bind(this)}></textarea>
           <button onClick={() => this.save()}> Save </button>
-        </div >
+        </div>
         <div className="colorPicker">
-          <GithubPicker width='85px' colors={colors} triangle='hide' onChangeComplete={ (color) => this.changeColor(color)}/>
+          <ColorPicker width='85px' colors={colors} triangle='hide' onChangeComplete={ (color) => this.changeColor(color)}/>
         </div>
       </div>
     )
