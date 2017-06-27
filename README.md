@@ -2,9 +2,9 @@
 
 * **Zaha** is a visual note taking app made with React.
 
-<img src="/src/img/Zaha1.png" alt="alt text" width="600" height="400">
+<img src="https://raw.githubusercontent.com/tamg/zaha/master/src/img/zaha1.png" alt="alt text" width="600" height="400">
 
-<img src="/src/img/Zaha2.png" alt="alt text" width="600" height="400">
+<img src="https://raw.githubusercontent.com/tamg/zaha/master/src/img/zaha2.png" alt="alt text" width="600" height="400">
 
 * This project is made at the [Recurse Center](https://www.recurse.com/) by [Tamrat](tamrat.co)
 
