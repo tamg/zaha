@@ -87,7 +87,7 @@ class ImageNote extends Component {
     )
   }
 
-  //check if we are editing or displaying and display the right render
+  //check if we are editing or displaying 
   render() {
     return ( <Draggable handle='strong' bounds="parent" position={this.props.position} onDrag={(e, position) => this.drag(e, position)}>
               {(this.props.editing) ? this.editMode() : this.displayMode()}

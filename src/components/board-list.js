@@ -23,12 +23,10 @@ class BoardList extends React.Component {
   }
 
   eachBoard(board) {
-    return(
-      <option key={board.id}
-              value={board.id}>
-              {board.title}
-      </option>
-    )
+    return(<option key={board.id}
+            value={board.id}>
+            {board.title}
+          </option>)
   }
 
   handleChange(event) {

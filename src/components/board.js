@@ -6,7 +6,6 @@ import ImageNote from './image-note'
 class Board extends Component {
   constructor(props) {
     super(props)
-
   }
 
   eachNote(txtNote) {
@@ -45,7 +44,7 @@ class Board extends Component {
     return (
       <div>
         {
-          !this.props.activeBoard ? '' : //no board available to render 
+          !this.props.activeBoard ? '' : //no board available to render
 
           <div className="board" style={{height: '100vh', width: '100%', position: 'relative', padding: '10px'}}>
             {this.props.activeBoard.txtNotes.map(this.eachNote, this)}
